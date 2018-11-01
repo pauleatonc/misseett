@@ -9,7 +9,7 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'dbe6f178050e37bdcf4d839507b8c489a449e17cb516088b77c6da3ed6283a82a810fb9c181e620f180c7a749194f8fc2e861666cf88ed38f58f6120a7f92502'
-  
+
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -257,6 +257,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :google_oauth2, '918480984785-720sfq5vhiv68pi5slqbunev7ueosdl7.apps.googleusercontent.com', 'sZTtxZ8Y8c7ONHNBN_gazT2V', {}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

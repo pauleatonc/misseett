@@ -11,6 +11,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# Google authenticate
+gem 'omniauth-google-oauth2'
 # JavaScript
 gem 'jquery-rails'
 # Use Uglifier as compressor for JavaScript assets
