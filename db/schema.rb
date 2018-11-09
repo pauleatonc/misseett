@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_09_003834) do
+ActiveRecord::Schema.define(version: 2018_11_09_010655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,20 @@ ActiveRecord::Schema.define(version: 2018_11_09_003834) do
     t.index ["state_id"], name: "index_cities_on_state_id"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "contact"
+    t.string "email"
+    t.integer "phone"
+    t.string "address_1"
+    t.string "address_2"
+    t.bigint "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_companies_on_city_id"
+  end
+
   create_table "continents", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -62,6 +76,20 @@ ActiveRecord::Schema.define(version: 2018_11_09_003834) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.text "eett"
+    t.bigint "project_traffic_id"
+    t.bigint "project_types_id"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_products_on_company_id"
+    t.index ["project_traffic_id"], name: "index_products_on_project_traffic_id"
+    t.index ["project_types_id"], name: "index_products_on_project_types_id"
   end
 
   create_table "project_traffics", force: :cascade do |t|
@@ -119,6 +147,10 @@ ActiveRecord::Schema.define(version: 2018_11_09_003834) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "companies", "cities"
+  add_foreign_key "products", "companies"
+  add_foreign_key "products", "project_traffics"
+  add_foreign_key "products", "project_types", column: "project_types_id"
   add_foreign_key "projects", "cities"
   add_foreign_key "projects", "project_traffics"
   add_foreign_key "projects", "project_types"

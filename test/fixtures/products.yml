@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  eett: MyText
+  project_traffic: one
+  project_types: one
+  company: one
+
+two:
+  title: MyString
+  description: MyText
+  eett: MyText
+  project_traffic: two
+  project_types: two
+  company: two
