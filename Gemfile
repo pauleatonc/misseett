@@ -15,6 +15,10 @@ gem 'sass-rails', '~> 5.0'
 gem 'omniauth-google-oauth2'
 # JavaScript
 gem 'jquery-rails'
+# Cancancan for authorizations
+gem 'cancancan'
+# Rolify for Role managment
+gem 'rolify'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes

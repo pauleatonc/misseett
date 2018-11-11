@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   belongs_to :city
   belongs_to  :gender
   # Include default devise modules. Others available are:
