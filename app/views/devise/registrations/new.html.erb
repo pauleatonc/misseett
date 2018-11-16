@@ -20,14 +20,39 @@
     </div>
 
     <div class="field">
+      <%= f.label :gender_id %><br />
+      <%= f.text_field :gender_id, autofocus: true, autocomplete: "gender" %>
+    </div>
+
+    <div class="field">
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
 
-    <div class="field">
+    <!-- <div class="field">
       <%= f.label :city_id %><br />
       <%= collection_select( :user, :city_id, City.all, :id, :name, :prompt => "Seleccionar") %>
+    </div> -->
+
+    <div class="field">
+      <!-- Country -->
+      <%= label_tag :country %>
+      <%= select_tag :country, options_for_select(CS.countries.map { |c| [c[1], c[0]] } ) %>
     </div>
+
+    <div class="field">
+      <!-- State -->
+      <%= label_tag :state %>
+      <%= select_tag :state, options_for_select([]) %>
+    </div>
+
+    <div class="field">
+      <!-- City -->
+      <%= f.label :city_id %>
+      <%= f.select :city_id, options_for_select([]) %>
+    </div>
+
+
 
 
     <div class="field">
