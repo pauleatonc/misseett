@@ -18,7 +18,7 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in "Description", with: @product.description
     fill_in "Eett", with: @product.eett
     fill_in "Project Traffic", with: @product.project_traffic_id
-    fill_in "Project Types", with: @product.project_types_id
+    fill_in "Project Type", with: @product.project_type_id
     fill_in "Title", with: @product.title
     click_on "Create Product"
 
@@ -34,7 +34,7 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in "Description", with: @product.description
     fill_in "Eett", with: @product.eett
     fill_in "Project Traffic", with: @product.project_traffic_id
-    fill_in "Project Types", with: @product.project_types_id
+    fill_in "Project Type", with: @product.project_type_id
     fill_in "Title", with: @product.title
     click_on "Update Product"
 

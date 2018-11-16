@@ -5,7 +5,7 @@ one:
   description: MyText
   eett: MyText
   project_traffic: one
-  project_types: one
+  project_type: one
   company: one
 
 two:
@@ -13,5 +13,5 @@ two:
   description: MyText
   eett: MyText
   project_traffic: two
-  project_types: two
+  project_type: two
   company: two
