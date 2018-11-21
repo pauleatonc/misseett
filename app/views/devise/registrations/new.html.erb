@@ -6,6 +6,7 @@
     <%= devise_error_messages! %>
 
     <div class="field">
+      <%= f.label :avatar %>
       <%= f.file_field :avatar %>
     </div>
 
@@ -20,40 +21,30 @@
     </div>
 
     <div class="field">
-      <%= f.label :gender_id %><br />
-      <%= f.text_field :gender_id, autofocus: true, autocomplete: "gender" %>
+      <%= f.label :gender %><br />
+      <%= collection_select(:user, :gender_id, Gender.all, :id, :name, prompt: true) %>
     </div>
+
 
     <div class="field">
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
 
-    <!-- <div class="field">
-      <%= f.label :city_id %><br />
-      <%= collection_select( :user, :city_id, City.all, :id, :name, :prompt => "Seleccionar") %>
-    </div> -->
-
     <div class="field">
-      <!-- Country -->
-      <%= label_tag :country %>
-      <%= select_tag :country, options_for_select(CS.countries.map { |c| [c[1], c[0]] } ) %>
+      <%= f.label :country %><br />
+      <%= collection_select(:state, :country_id, Country.all, :id, :name, prompt: true) %>
     </div>
 
     <div class="field">
-      <!-- State -->
-      <%= label_tag :state %>
-      <%= select_tag :state, options_for_select([]) %>
+      <%= f.label :state %><br />
+      <%= f.grouped_collection_select :city_id, Country.order(:name), :states, :name, :id, :name, prompt: true %>
     </div>
 
     <div class="field">
-      <!-- City -->
-      <%= f.label :city_id %>
-      <%= f.select :city_id, options_for_select([]) %>
+      <%= f.label :city %><br />
+      <%= f.grouped_collection_select :city_id, State.order(:name), :cities, :name, :id, :name, prompt: true %>
     </div>
-
-
-
 
     <div class="field">
       <%= f.label :password %>

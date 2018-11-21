@@ -18,6 +18,7 @@
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <% if user_signed_in? %>
+          <%= image_tag current_user.avatar.variant(resize: "60x60") %>
           <%= current_user.email %>
         <% else %>
           Ingreso

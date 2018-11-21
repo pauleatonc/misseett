@@ -6,22 +6,65 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#City.destroy_all
+Gender.destroy_all
+Continent.destroy_all
+Country.destroy_all
+State.destroy_all
+City.destroy_all
 Product.destroy_all
 ProjectTraffic.destroy_all
 ProjectType.destroy_all
 Company.destroy_all
 
-  # state = State.create
-  #
-  # cities = City.create!([{ name: 'Concepción'}, { name: 'Valparaíso'}, { name: 'La Serena'},
-  # { name: 'Antofagasta'}, { name: 'Temuco'}, { name: 'Rancagua'}, { name: 'Iquique'},
-  # { name: 'Talca'}, { name: 'Arica'}, { name: 'Puerto Montt'}, { name: 'Chillán'},
-  # { name: 'Los Ángeles'}, { name: 'Calama'}, { name: 'Copiapó'}, { name: 'Osorno'},
-  # { name: 'Quillota'}, { name: 'Valdivia'}, { name: 'Punta Arenas'}, { name: 'San Antonio'},
-  # { name: 'Curicó'}, { name: 'Ovalle'}, { name: 'Linares'}, { name: 'Los Andes'},
-  # { name: 'Melipilla'}, { name: 'San Felipe'}])
+america = Continent.create(name: 'America del Sur')
 
+  chile = Country.create( name: 'Chile', continent: america)
+
+  arica = State.create(name: 'Arica y Parinacota', country: chile )
+  tarapaca = State.create(name: 'Tarapacá', country: chile )
+  antofagasta = State.create(name: 'Antofagasta', country: chile )
+  atacama = State.create(name: 'Atacama', country: chile )
+  coquimbo = State.create(name: 'Coquimbo', country: chile )
+  valparaiso = State.create(name: 'Valparaíso', country: chile )
+  santiago = State.create(name: 'Metropolitana de Santiago', country: chile )
+  ohiggins = State.create(name: "Libertador General Bernardo O'Higgins", country: chile )
+  maule = State.create(name: 'Maule', country: chile )
+  nuble = State.create(name: 'Ñuble', country: chile )
+  biobio = State.create(name: 'Biobío', country: chile )
+  araucania = State.create(name: 'La Araucanía', country: chile )
+  los_rios = State.create(name: 'Los Ríos', country: chile )
+  los_lagos = State.create(name: 'Los Lagos', country: chile )
+  aysen = State.create(name: 'Aysén del General Carlos Ibáñez del Campo', country: chile )
+  magallanes = State.create(name: 'Magallanes y de la Antártica Chilena', country: chile )
+
+
+  cities = City.create!([{ name: 'Concepción', state: biobio }, { name: 'Valparaíso', state: valparaiso },
+  { name: 'La Serena', state: coquimbo}, { name: 'Antofagasta', state: antofagasta},
+  { name: 'Temuco', state: araucania}, { name: 'Rancagua', state: ohiggins}, { name: 'Iquique', state: tarapaca},
+  { name: 'Talca', state: maule}, { name: 'Arica', state: arica}, { name: 'Puerto Montt', state: los_lagos}, { name: 'Chillán', state: nuble},
+  { name: 'Los Ángeles', state: biobio}, { name: 'Calama', state: antofagasta}, { name: 'Copiapó', state: atacama}, { name: 'Osorno', state: los_lagos},
+  { name: 'Quillota', state: valparaiso}, { name: 'Valdivia', state: los_rios}, { name: 'Punta Arenas', state: magallanes}, { name: 'San Antonio', state: valparaiso},
+  { name: 'Curicó', state: maule}, { name: 'Ovalle', state: coquimbo}, { name: 'Linares', state: maule}, { name: 'Los Andes', state: valparaiso},
+  { name: 'Melipilla', state: santiago}, { name: 'San Felipe', state: valparaiso}, { name: 'Coyaique', state: aysen},
+  { name: 'Cerrillos', state: santiago}, { name: 'la reina', state: santiago}, { name: 'pudahuel', state: santiago},
+  { name: 'Cerro Navia', state: santiago}, { name: 'Las Condes', state: santiago}, { name: 'Quilicura', state: santiago},
+  { name: 'Conchalí', state: santiago}, { name: 'Lo Barnechea', state: santiago}, { name: 'Quinta Normal', state: santiago},
+  { name: 'El Bosque', state: santiago}, { name: 'Lo Espejo', state: santiago}, { name: 'Recoleta', state: santiago},
+  { name: 'Estacion Central', state: santiago}, { name: 'Lo Prado', state: santiago}, { name: 'Renca', state: santiago},
+  { name: 'Huechuraba', state: santiago}, { name: 'Macul', state: santiago}, { name: 'San Miguel', state: santiago},
+  { name: 'Independencia', state: santiago}, { name: 'Maipú', state: santiago}, { name: 'San Joaquin', state: santiago},
+  { name: 'La Cisterna', state: santiago}, { name: 'Ñuñoa', state: santiago}, { name: 'San Ramón', state: santiago},
+  { name: 'La Florida', state: santiago}, { name: 'Pedro Aguirre Cerda', state: santiago}, { name: 'Santiago', state: santiago},
+  { name: 'La Pintana', state: santiago}, { name: 'Peñalolen', state: santiago}, { name: 'Vitacura', state: santiago},
+  { name: 'La Granja', state: santiago}, { name: 'Providencia', state: santiago}, { name: 'Padre Hurtado', state: santiago},
+  { name: 'San Bernardo', state: santiago}, { name: 'Puente Alto', state: santiago}, { name: 'Pirque', state: santiago},
+  { name: 'San José de Maipo', state: santiago}, { name: 'Colina', state: santiago}, { name: 'Lampa', state: santiago},
+  { name: 'Peñaflor', state: santiago}, { name: 'Talagante', state: santiago}, { name: 'Isla de Maipo', state: santiago},
+  { name: 'El Monte', state: santiago},{ name: 'Paine', state: santiago},{ name: 'Calera de Tango', state: santiago},
+  ])
+
+
+  gender = Gender.create!([{name: 'male'}, {name: 'female'}, {name: 'other'}])
 
 traffic = ProjectTraffic.create(category: "Alto Trafico")
 type= ProjectType.create(category: "Institucional")
