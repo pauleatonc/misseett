@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_235738) do
+ActiveRecord::Schema.define(version: 2018_11_26_003957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,12 @@ ActiveRecord::Schema.define(version: 2018_11_15_235738) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_types", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -87,7 +93,9 @@ ActiveRecord::Schema.define(version: 2018_11_15_235738) do
     t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "product_type_id"
     t.index ["company_id"], name: "index_products_on_company_id"
+    t.index ["product_type_id"], name: "index_products_on_product_type_id"
     t.index ["project_traffic_id"], name: "index_products_on_project_traffic_id"
     t.index ["project_type_id"], name: "index_products_on_project_type_id"
   end
@@ -151,7 +159,9 @@ ActiveRecord::Schema.define(version: 2018_11_15_235738) do
     t.string "name"
     t.bigint "city_id"
     t.bigint "gender_id"
+    t.bigint "company_id"
     t.index ["city_id"], name: "index_users_on_city_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender_id"], name: "index_users_on_gender_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -167,6 +177,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_235738) do
 
   add_foreign_key "companies", "cities"
   add_foreign_key "products", "companies"
+  add_foreign_key "products", "product_types"
   add_foreign_key "products", "project_traffics"
   add_foreign_key "products", "project_types"
   add_foreign_key "projects", "cities"
@@ -174,5 +185,6 @@ ActiveRecord::Schema.define(version: 2018_11_15_235738) do
   add_foreign_key "projects", "project_types"
   add_foreign_key "projects", "users"
   add_foreign_key "users", "cities"
+  add_foreign_key "users", "companies"
   add_foreign_key "users", "genders"
 end

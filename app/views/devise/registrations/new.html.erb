@@ -7,7 +7,7 @@
 
     <div class="field">
       <%= f.label :avatar %>
-      <%= f.file_field :avatar %>
+      <%= f.file_field :avatar, multiple: false, accept: 'image/jpeg, image/jpg, image/gif, image/png' %>
     </div>
 
     <div class="field">

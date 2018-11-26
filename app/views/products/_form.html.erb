@@ -12,6 +12,12 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true, accept: 'image/jpeg, image/jpg, image/gif, image/png' %>
+  </div>
+
+
+  <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
@@ -27,18 +33,23 @@
   </div>
 
   <div class="field">
+    <%= form.label :product_type_id %>
+    <%= collection_select(:product, :product_type_id, ProductType.all, :id, :name, prompt: true) %>
+  </div>
+
+  <div class="field">
     <%= form.label :project_traffic_id %>
-    <%= form.text_field :project_traffic_id %>
+    <%= collection_select(:product, :project_traffic_id, ProjectTraffic.all, :id, :category, prompt: true) %>
   </div>
 
   <div class="field">
     <%= form.label :project_type_id %>
-    <%= form.text_field :project_type_id %>
+    <%= collection_select(:product, :project_type_id, ProjectType.all, :id, :category, prompt: true) %>
   </div>
 
   <div class="field">
     <%= form.label :company_id %>
-    <%= form.text_field :company_id %>
+    <%= form.text_field current_user.company_id %>
   </div>
 
   <div class="actions">

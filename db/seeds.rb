@@ -6,7 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.destroy_all
 Gender.destroy_all
+Company.destroy_all
 Continent.destroy_all
 Country.destroy_all
 State.destroy_all
@@ -14,7 +16,8 @@ City.destroy_all
 Product.destroy_all
 ProjectTraffic.destroy_all
 ProjectType.destroy_all
-Company.destroy_all
+ProductType.destroy_all
+
 
 america = Continent.create(name: 'America del Sur')
 
@@ -62,14 +65,14 @@ america = Continent.create(name: 'America del Sur')
   { name: 'Peñaflor', state: santiago}, { name: 'Talagante', state: santiago}, { name: 'Isla de Maipo', state: santiago},
   { name: 'El Monte', state: santiago},{ name: 'Paine', state: santiago},{ name: 'Calera de Tango', state: santiago},
   ])
-
+  noncities = City.create(name: 'non', state: santiago)
 
   gender = Gender.create!([{name: 'male'}, {name: 'female'}, {name: 'other'}])
 
 traffic = ProjectTraffic.create(category: "Alto Trafico")
 type= ProjectType.create(category: "Institucional")
-company = Company.create(name: "Simonswerk")
-
+company = Company.create!([{name: "Simonswerk", city: noncities}, {name: "", city: noncities}])
+product_type = ProductType.create!([{name: 'Puertas de Madera'}, {name: 'Quincalleria'}, {name: 'Puertas Metálicas'}])
 
   15.times do
   Product.create(
@@ -78,6 +81,8 @@ company = Company.create(name: "Simonswerk")
   eett: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   project_traffic: traffic,
   project_type: type,
-  company: company
+  product_type: product_type.first,
+  company: company.first
+
     )
   end
