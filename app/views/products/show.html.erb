@@ -1,12 +1,14 @@
 <body>
-  <div class="">
+  <div class="container">
 
 
     <p id="notice"><%= notice %></p>
 
     <p>
-      <%= image_tag @product.images %>
-    </p
+      <%= @product.images.each do |image| %>
+      <%= image_tag image %><br />
+      <% end %>
+    </p>
 
     <p>
       <strong>Title:</strong>

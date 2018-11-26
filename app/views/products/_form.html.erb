@@ -49,7 +49,7 @@
 
   <div class="field">
     <%= form.label :company_id %>
-    <%= form.text_field current_user.company_id %>
+    <%= collection_select(:product, :company_id, Company.all, :id, :name, prompt: true) %>
   </div>
 
   <div class="actions">
