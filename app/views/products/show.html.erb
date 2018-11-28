@@ -6,7 +6,7 @@
 
     <p>
       <%= @product.images.each do |image| %>
-      <%= image_tag image %><br />
+      <%= image_tag image.variant(resize: "400x400") %><br />
       <% end %>
     </p>
 
