@@ -17,9 +17,10 @@ class User < ApplicationRecord
             email: data['email'],
             firstname: data['first_name'],
             lastname: data['last_name'],
-            avatar:  data['image'],
+            avatar:  data['picture'],
             password: Devise.friendly_token[0,20]
           )
+          byebug
       end
     user
   end
