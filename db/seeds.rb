@@ -8,20 +8,23 @@
 
 User.destroy_all
 Gender.destroy_all
+Product.destroy_all
 Company.destroy_all
 Continent.destroy_all
 Country.destroy_all
 State.destroy_all
 City.destroy_all
-Product.destroy_all
+
 ProjectTraffic.destroy_all
 ProjectType.destroy_all
 ProductType.destroy_all
 
 
 america = Continent.create(name: 'America del Sur')
+continen_nil = Continent.create(name: 'nil')
 
   chile = Country.create( name: 'Chile', continent: america)
+
 
   arica = State.create(name: 'Arica y Parinacota', country: chile )
   tarapaca = State.create(name: 'Tarapacá', country: chile )
@@ -65,9 +68,8 @@ america = Continent.create(name: 'America del Sur')
   { name: 'Peñaflor', state: santiago}, { name: 'Talagante', state: santiago}, { name: 'Isla de Maipo', state: santiago},
   { name: 'El Monte', state: santiago},{ name: 'Paine', state: santiago},{ name: 'Calera de Tango', state: santiago},
   ])
-  noncities = City.create(name: 'non', state: santiago)
 
-  gender = Gender.create!([{name: 'male'}, {name: 'female'}, {name: 'other'}])
+  noncities = City.create!( name: 'indefinido', state: santiago )
 
 traffic = ProjectTraffic.create(category: "Alto Trafico")
 type= ProjectType.create(category: "Institucional")
