@@ -42,8 +42,13 @@
     </div>
 
     <div class="field">
-      <%= f.label :city %><br />
+      <%= f.label :city_id %><br />
       <%= f.grouped_collection_select :city_id, State.order(:name), :cities, :name, :id, :name, prompt: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :company %><br />
+      <%= f.text_field :company, autofocus: true, autocomplete: "empresa" %>
     </div>
 
     <div class="field">

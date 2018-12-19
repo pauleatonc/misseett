@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_07_000515) do
+ActiveRecord::Schema.define(version: 2018_12_19_004705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_000515) do
     t.string "title"
     t.text "description"
     t.text "eett"
+    t.string "code"
     t.bigint "project_traffic_id"
     t.bigint "project_type_id"
     t.bigint "company_id"
@@ -156,8 +157,12 @@ ActiveRecord::Schema.define(version: 2018_12_07_000515) do
     t.datetime "updated_at", null: false
     t.string "firstname"
     t.string "lastname"
-    t.string "name"
+    t.bigint "city_id"
+    t.bigint "gender_id"
+    t.string "company"
+    t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["gender_id"], name: "index_users_on_gender_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -178,4 +183,6 @@ ActiveRecord::Schema.define(version: 2018_12_07_000515) do
   add_foreign_key "projects", "project_traffics"
   add_foreign_key "projects", "project_types"
   add_foreign_key "projects", "users"
+  add_foreign_key "users", "cities"
+  add_foreign_key "users", "genders"
 end
