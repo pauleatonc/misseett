@@ -1,0 +1,43 @@
+<body>
+<div class="">
+
+    <p id="notice"><%= notice %></p>
+
+    <h1>Products</h1>
+
+    <table>
+      <tbody>
+        <div class="container">
+          <h1 class="center">Titulo</h1>
+          <div class="row">
+            <% @products.each do |product| %>
+            <div class="col-md-4 col-sm-1">
+              <div class="body">
+                <p>
+                  <% if product.images.attached? %>
+                    <%= image_tag product.images.first.variant(resize: "200x200") %></p>
+                  <% else %>
+                    <%= image_tag("seeds.png", size: "200x200") %></p>
+                  <% end %>
+                <h3><%= product.title %></h3>
+                <p><%= product.description %></p>
+                <h5><%= product.project_traffic.category %></h5>
+                <h5><%= product.project_type.category %></h5>
+                <h4><%= product.company.name %></h4>
+                <p><%= link_to 'Show', product %></p>
+                <p><%= link_to 'Edit', edit_product_path(product) %></p>
+                <p><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Product', new_product_path %>
+
+</div>
+</body>

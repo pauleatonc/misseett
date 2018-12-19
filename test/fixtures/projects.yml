@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: MyString
+  description: MyText
+  office: MyString
+  project_type: one
+  project_traffic: one
+  city: one
+
+two:
+  user: two
+  name: MyString
+  description: MyText
+  office: MyString
+  project_type: two
+  project_traffic: two
+  city: two
