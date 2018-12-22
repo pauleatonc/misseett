@@ -1,30 +1,61 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+<body>
+  <div class="container">
+    <div class="conteiner">
+      <h1>Perfil</h1>
+      <p>Revisa y completa tu perfil</p>
+    </div>
+    <div class="jumbotron">
+      <div class="container">
+        <div class="float-left">
+          <% if @user.avatar.attached? %>
+            <%= image_tag current_user.avatar.variant(resize: "200x200") %>
+          <% else %>
+          <%= image_tag("avaregeavatar.png", size: "250x250") %>
+          <% end %>
+        </div>
+        <div class="float-right">
+          <a href="<%= edit_user_registration_path %>" class="btn btn-info" role="button">Editar Perfil</a>
+        </div>
+      </div>
+      <div class="container">
+        <p>
+          <strong>Nombre:</strong>
+          <%= @user.firstname %>
+        </p>
+        <p>
+          <strong>Apellido:</strong>
+          <%= @user.lastname %>
+        </p>
+        <p>
+          <strong>Email:</strong>
+          <%= @user.email %>
+        </p>
+        <p>
+          <strong>Genero:</strong>
+          <% if @user.gender.nil? %>
+            <a>Completar</a>
+          <% else %>
+            <%= @user.gender.name %>
+          <% end %>
+        </p>
+        <p>
+          <strong>Empresa:</strong>
+          <% if @user.company.nil? %>
+          <a>Completar</a>
+        <% else %>
+          <%= @user.company %>
+        <% end %>
+        </p>
 
-
-
-<p>
-  <strong>Nombre:</strong>
-  <%= @user.firstname %>
-</p>
-<p>
-  <strong>Apellido:</strong>
-  <%= @user.lastname %>
-</p>
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-<p>
-  <strong>Genero:</strong>
-  <%= @user.gender.name %>
-</p>
-<p>
-  <strong>Empresa:</strong>
-  <%= @user.company %>
-</p>
-
-<p>
-  <strong>Ciudad:</strong>
-  <%= @user.city.name %>
-</p>
+        <p>
+          <strong>Ciudad:</strong>
+          <% if @user.city.nil? %>
+            <a>Completar</a>
+          <% else %>
+            <%= @user.city %>
+          <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>

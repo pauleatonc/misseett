@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   rolify
   has_one_attached :avatar
-  belongs_to :city, optional:true
+  belongs_to :city, optional: true
   belongs_to :gender, optional: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -13,14 +13,14 @@ class User < ApplicationRecord
     data = access_token.info
     user = User.where(email: data['email']).first
 
-    # Uncomment the section below if you want users to be created if they don't exist
+    # Uncommentthesectionbelowifyouwantusersto be created if they don't exist
       unless user
           user = User.create(
             email: data['email'],
             firstname: data['first_name'],
             lastname: data['last_name'],
             avatar:  data['picture'],
-            password: Devise.friendly_token[0,20]
+            password: Devise.friendly_token[0, 20]
           )
       end
   end
