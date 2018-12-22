@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   rolify
   has_one_attached :avatar
+  has_many :projects
+  has_many :products, through: :projects
+
   belongs_to :city, optional: true
   belongs_to :gender, optional: true
   # Include default devise modules. Others available are:
