@@ -1,39 +1,44 @@
-<p id="notice"><%= notice %></p>
+<body>
+  <div class="container">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @project.user %>
-</p>
+    <p>
+      <strong>User:</strong>
+      <%= @project.user.firstname + " " + @project.user.lastname %>
+    </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+    <p>
+      <strong>Name:</strong>
+      <%= @project.name %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @project.description %>
+    </p>
 
-<p>
-  <strong>Office:</strong>
-  <%= @project.office %>
-</p>
+    <p>
+      <strong>Office:</strong>
+      <%= @project.office %>
+    </p>
 
-<p>
-  <strong>Project type:</strong>
-  <%= @project.project_type %>
-</p>
+    <p>
+      <strong>Project type:</strong>
+      <%= @project.project_type.category %>
+    </p>
 
-<p>
-  <strong>Project traffic:</strong>
-  <%= @project.project_traffic %>
-</p>
+    <p>
+      <strong>Project traffic:</strong>
+      <%= @project.project_traffic.category %>
+    </p>
 
-<p>
-  <strong>City:</strong>
-  <%= @project.city %>
-</p>
+    <p>
+      <strong>City:</strong>
+      <%= @project.city.name %>
+    </p>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+    <%= link_to 'Edit', edit_project_path(@project) %> |
+    <%= link_to 'Back', projects_path %>
+
+  </div>
+</body>

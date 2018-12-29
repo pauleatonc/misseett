@@ -25,6 +25,8 @@ class User < ApplicationRecord
             avatar:  data['picture'],
             password: Devise.friendly_token[0, 20]
           )
+
       end
+      user
   end
 end

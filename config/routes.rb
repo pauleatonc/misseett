@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  resources :products
-  resources :projects
+  resources :products do
+    resources :projects, only: :create
+  end
+
+  resources :projects #, only: [:show, :edit, :update, :destroy, :index, :new]
+
   resources :states, only: :index
   resources :cities, only: :index
 
