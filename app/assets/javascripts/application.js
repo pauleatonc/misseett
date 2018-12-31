@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery-backstrech
+//= require datatables.net/js/jquery.dataTables
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
