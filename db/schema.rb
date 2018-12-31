@@ -9,12 +9,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_11_06_231918) do
-=======
-ActiveRecord::Schema.define(version: 2018_12_19_004705) do
->>>>>>> develop
+ActiveRecord::Schema.define(version: 2018_12_22_225922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,7 +122,9 @@ ActiveRecord::Schema.define(version: 2018_12_19_004705) do
     t.bigint "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "product_id"
     t.index ["city_id"], name: "index_projects_on_city_id"
+    t.index ["product_id"], name: "index_projects_on_product_id"
     t.index ["project_traffic_id"], name: "index_projects_on_project_traffic_id"
     t.index ["project_type_id"], name: "index_projects_on_project_type_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -161,14 +158,10 @@ ActiveRecord::Schema.define(version: 2018_12_19_004705) do
     t.datetime "updated_at", null: false
     t.string "firstname"
     t.string "lastname"
-<<<<<<< HEAD
-    t.string "name"
-=======
     t.bigint "city_id"
     t.bigint "gender_id"
     t.string "company"
     t.index ["city_id"], name: "index_users_on_city_id"
->>>>>>> develop
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender_id"], name: "index_users_on_gender_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -188,6 +181,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_004705) do
   add_foreign_key "products", "project_traffics"
   add_foreign_key "products", "project_types"
   add_foreign_key "projects", "cities"
+  add_foreign_key "projects", "products"
   add_foreign_key "projects", "project_traffics"
   add_foreign_key "projects", "project_types"
   add_foreign_key "projects", "users"
