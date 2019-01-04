@@ -5,5 +5,9 @@ protected
 
 def configure_permitted_parameters
   devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :gender_id, :city_id, :company, :avatar ])
+  devise_parameter_sanitizer.permit(:account_update, keys: [:firstname, :lastname, :gender_id, :city_id, :company, :avatar ])
 end
+
+
+
 end

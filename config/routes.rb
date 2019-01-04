@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
+  get 'carts/show'
   resources :products do
-    resources :projects, only: :create
+    resources :carts, only: :create
   end
 
-  resources :projects #, only: [:show, :edit, :update, :destroy, :index, :new]
-
+  resources :projects
   resources :states, only: :index
   resources :cities, only: :index
 
   get 'landing/index'
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'users/registrations'
+  }
   get 'user/show'
   resources :users, only: :show
 
