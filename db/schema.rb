@@ -132,9 +132,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_172603) do
     t.bigint "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "product_id"
     t.index ["city_id"], name: "index_projects_on_city_id"
-    t.index ["product_id"], name: "index_projects_on_product_id"
     t.index ["project_traffic_id"], name: "index_projects_on_project_traffic_id"
     t.index ["project_type_id"], name: "index_projects_on_project_type_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -193,7 +191,6 @@ ActiveRecord::Schema.define(version: 2019_01_04_172603) do
   add_foreign_key "products", "project_traffics"
   add_foreign_key "products", "project_types"
   add_foreign_key "projects", "cities"
-  add_foreign_key "projects", "products"
   add_foreign_key "projects", "project_traffics"
   add_foreign_key "projects", "project_types"
   add_foreign_key "projects", "users"
