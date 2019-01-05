@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_04_172603) do
+ActiveRecord::Schema.define(version: 2019_01_05_044931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,8 @@ ActiveRecord::Schema.define(version: 2019_01_04_172603) do
     t.bigint "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cart_id"
+    t.index ["cart_id"], name: "index_projects_on_cart_id"
     t.index ["city_id"], name: "index_projects_on_city_id"
     t.index ["project_traffic_id"], name: "index_projects_on_project_traffic_id"
     t.index ["project_type_id"], name: "index_projects_on_project_type_id"
@@ -190,6 +192,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_172603) do
   add_foreign_key "products", "product_types"
   add_foreign_key "products", "project_traffics"
   add_foreign_key "products", "project_types"
+  add_foreign_key "projects", "carts"
   add_foreign_key "projects", "cities"
   add_foreign_key "projects", "project_traffics"
   add_foreign_key "projects", "project_types"
