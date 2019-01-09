@@ -11,7 +11,7 @@ class CartsController < ApplicationController
   def create
     @product = Product.find(params[:product_id])
     @project = Project.last.id
-    byebug
+
     @cart = Cart.create(product_id: @product, project_id: @project)
     if @cart.save
       redirect_to products_path, notice: 'La orden ha sido ingresada'

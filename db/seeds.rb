@@ -18,8 +18,9 @@ City.destroy_all
 ProjectTraffic.destroy_all
 ProjectType.destroy_all
 ProductType.destroy_all
+Event.destroy_all
 
-  Gender.create!([{ name: 'Male' }, { name: 'Female' }, { name: 'Other' }]) 
+  Gender.create!([{ name: 'Male' }, { name: 'Female' }, { name: 'Other' }])
 
 america = Continent.create(name: 'America del Sur')
 continen_nil = Continent.create(name: 'nil')

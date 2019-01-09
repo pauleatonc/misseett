@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_05_044931) do
+ActiveRecord::Schema.define(version: 2019_01_09_051200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2019_01_05_044931) do
     t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "finished", default: false
     t.index ["product_id"], name: "index_carts_on_product_id"
     t.index ["project_id"], name: "index_carts_on_project_id"
   end
@@ -79,6 +80,17 @@ ActiveRecord::Schema.define(version: 2019_01_05_044931) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["continent_id"], name: "index_countries_on_continent_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.date "start"
+    t.date "end"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_events_on_project_id"
   end
 
   create_table "genders", force: :cascade do |t|
@@ -188,6 +200,7 @@ ActiveRecord::Schema.define(version: 2019_01_05_044931) do
   add_foreign_key "carts", "products"
   add_foreign_key "carts", "projects"
   add_foreign_key "companies", "cities"
+  add_foreign_key "events", "projects"
   add_foreign_key "products", "companies"
   add_foreign_key "products", "product_types"
   add_foreign_key "products", "project_traffics"

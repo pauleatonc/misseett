@@ -11,9 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap/dist/js/bootstrap
 //= require datatables.net/js/jquery.dataTables
 //= require datatables.net-bs4/js/dataTables.bootstrap4
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require moment/moment
+//= require fullcalendar/dist/fullcalendar
 //= require_tree .

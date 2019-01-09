@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   get 'carts/show'
   resources :products do
     resources :carts, only: :create
