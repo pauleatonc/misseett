@@ -7,14 +7,15 @@
     <table id="myTable" class="table">
       <thead>
         <tr>
-          <th>User</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Office</th>
-          <th>Project type</th>
-          <th>Project traffic</th>
-          <th>City</th>
-          <th>Options</th>
+          <th>Usuario</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Oficina</th>
+          <th>Tipo de Proyecto</th>
+          <th>Trafico de Proyecto</th>
+          <th>Ciudad</th>
+          <th>Status</th>
+          <th>Opciones</th>
         </tr>
       </thead>
 
@@ -28,9 +29,14 @@
             <td><%= project.project_type.category %></td>
             <td><%= project.project_traffic.category %></td>
             <td><%= project.city.name %></td>
+              <% if project.status_open = true %>
+                  <td><%= link_to 'Abierto', status_closed_project_path(project), class: 'btn btn-info', method: :post, data: { confirm: "¿Seguro quiere cerrar el proyecto #{project.name}?" } %></td>
+                <% else %>
+                  <td><%= link_to 'Cerrado', status_opened_project_path(project), class: 'btn btn-danger', method: :post, data: { confirm: "¿Seguro quiere reabrir el proyecto #{project.name}?" } %></td>
+                <% end %>
             <td><%= link_to 'Show', project %>
             <%= link_to 'Edit', edit_project_path(project) %>
-            <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <%= link_to 'Destroy', project, method: :delete, data: { confirm: '¿Seguro quiere eliminar el proyecto?' } %></td>
           </tr>
         <% end %>
       </tbody>
@@ -42,45 +48,7 @@
 
   </div>
 
-<div id='calendar' class="container"></div>
+<div id='calendar' class="container" data-token="<%= form_authenticity_token %>"></div>
 <%= render 'modal' %>
-  <script>
-  $(document).ready( function () {
-      $('#myTable').DataTable();
-  } );
 
-      $('#calendar').fullCalendar({
-      defaultView: 'month',
-      eventSources: [
-          '<%= projects_path %>',
-          '<%= events_path %>'
-        ],
-        eventClick: function( event, jsEvent, view ) {
-          console.log(event);
-          $('.modal').modal();
-        },
-        eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) { ;
-          console.log(event.start.format());
-            $.ajax({
-            url: '/events/' + event.id,
-            type: 'PATCH',
-            dataType: 'json',
-            data: {
-              event: {start: event.start.format()},
-              authenticity_token: "<%= form_authenticity_token %>"
-            }
-          })
-          .done(function() {
-            console.log("success");
-          })
-          .fail(function() {
-            console.log("error");
-          })
-          .always(function() {
-            console.log("complete");
-          });
-
-        }
-      });
-  </script>
 </body>

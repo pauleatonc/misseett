@@ -1,8 +1,8 @@
-class CartsController < ApplicationController
+class SpecificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @carts = Cart.all
+    @specifications = Specifications.all
   end
 
   def show
@@ -12,8 +12,8 @@ class CartsController < ApplicationController
     @product = Product.find(params[:product_id])
     @project = Project.last
 
-    @cart = Cart.new(product_id: @product.id, project_id: @project.id)
-    if @cart.save!
+    @specification = Specification.new(product_id: @product.id, project_id: @project.id)
+    if @specification.save!
       redirect_to products_path, notice: 'La orden ha sido ingresada'
     else
       redirect_to products_path, alert: 'la orden no ha podido ser ingresada'

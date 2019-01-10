@@ -37,7 +37,7 @@
                   <%= link_to 'Show', product %>
                   <%= link_to 'Edit', edit_product_path(product) %>
                   <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-                  <%= link_to 'Agregar', product_carts_path(product), class: 'btn btn-success', method: :post%>
+                  <%= link_to 'Agregar', product_specifications_path(product), class: 'btn btn-success', method: :post%>
                 </td>
               </tr>
               <!-- </div>
@@ -78,7 +78,7 @@
         <%= link_to 'Show', product %>
         <%= link_to 'Edit', edit_product_path(product) %>
         <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Agregar', product_carts_path(product), class: 'btn btn-success', method: :post%>
+        <%= link_to 'Agregar', product_specifications_path(product), class: 'btn btn-success', method: :post%>
     </div>
   </tr>
   <% end %>

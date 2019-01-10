@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_project, only: [:index, :show, :edit, :update, :destroy, :create]
+  # before_action :set_project, only: [:index, :show, :edit, :update, :destroy, :create, :status_opened, :status_closed]
 
   # GET /projects
   # GET /projects.json
@@ -38,6 +38,22 @@ class ProjectsController < ApplicationController
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+
+  def status_opened
+    @project = Project.find(params[:id])
+    @project.status_open = true
+    @project.save
+    redirect_to projects_path, notice: 'Se ha cambiado el status del proyecto'
+  end
+
+  def status_closed
+    @project = Project.find(params[:id])
+    @project.status_open = false
+    @project.save
+    redirect_to projects_path, notice: 'Se ha cambiado el status del proyecto'
+  end
+
+
   end
 
   # PATCH/PUT /projects/1

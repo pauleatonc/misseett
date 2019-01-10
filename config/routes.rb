@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
+  get 'specifications/show'
   resources :events
-  get 'carts/show'
   resources :products do
-    resources :carts, only: :create
+    resources :specifications, only: :create
   end
 
-  resources :projects
+  resources :projects do
+    member do
+      post 'status_opened', to: 'projects#status_opened'
+      post 'status_closed', to: 'projects#status_closed'
+    end
+  end
   resources :states, only: :index
   resources :cities, only: :index
 
