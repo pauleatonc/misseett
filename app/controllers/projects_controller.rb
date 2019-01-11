@@ -38,23 +38,20 @@ class ProjectsController < ApplicationController
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+  end
 
   def status_opened
-    @project = Project.find(params[:id])
-    @project.status_open = true
+    @project.status_open?  true
     @project.save
     redirect_to projects_path, notice: 'Se ha cambiado el status del proyecto'
   end
 
   def status_closed
-    @project = Project.find(params[:id])
-    @project.status_open = false
+    @project.status_open?  false
     @project.save
     redirect_to projects_path, notice: 'Se ha cambiado el status del proyecto'
   end
 
-
-  end
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json

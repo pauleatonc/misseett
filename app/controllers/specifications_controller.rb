@@ -10,7 +10,7 @@ class SpecificationsController < ApplicationController
 
   def create
     @product = Product.find(params[:product_id])
-    @project = Project.last
+    @project = Project.find(params[:project_id])
 
     @specification = Specification.new(product_id: @product.id, project_id: @project.id)
     if @specification.save!

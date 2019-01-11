@@ -29,7 +29,7 @@
             <td><%= project.project_type.category %></td>
             <td><%= project.project_traffic.category %></td>
             <td><%= project.city.name %></td>
-              <% if project.status_open = true %>
+              <% if project.status_open == true %>
                   <td><%= link_to 'Abierto', status_closed_project_path(project), class: 'btn btn-info', method: :post, data: { confirm: "¿Seguro quiere cerrar el proyecto #{project.name}?" } %></td>
                 <% else %>
                   <td><%= link_to 'Cerrado', status_opened_project_path(project), class: 'btn btn-danger', method: :post, data: { confirm: "¿Seguro quiere reabrir el proyecto #{project.name}?" } %></td>
