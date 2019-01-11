@@ -9,7 +9,12 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_12_22_225922) do
+=======
+
+ActiveRecord::Schema.define(version: 2019_01_10_031643) do
+>>>>>>> develop
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +76,17 @@ ActiveRecord::Schema.define(version: 2018_12_22_225922) do
     t.index ["continent_id"], name: "index_countries_on_continent_id"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.date "start"
+    t.date "end"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_events_on_project_id"
+  end
+
   create_table "genders", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -122,9 +138,8 @@ ActiveRecord::Schema.define(version: 2018_12_22_225922) do
     t.bigint "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "product_id"
+    t.boolean "status_open", default: true
     t.index ["city_id"], name: "index_projects_on_city_id"
-    t.index ["product_id"], name: "index_projects_on_product_id"
     t.index ["project_traffic_id"], name: "index_projects_on_project_traffic_id"
     t.index ["project_type_id"], name: "index_projects_on_project_type_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -138,6 +153,15 @@ ActiveRecord::Schema.define(version: 2018_12_22_225922) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "specifications", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_specifications_on_product_id"
+    t.index ["project_id"], name: "index_specifications_on_project_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -176,15 +200,17 @@ ActiveRecord::Schema.define(version: 2018_12_22_225922) do
   end
 
   add_foreign_key "companies", "cities"
+  add_foreign_key "events", "projects"
   add_foreign_key "products", "companies"
   add_foreign_key "products", "product_types"
   add_foreign_key "products", "project_traffics"
   add_foreign_key "products", "project_types"
   add_foreign_key "projects", "cities"
-  add_foreign_key "projects", "products"
   add_foreign_key "projects", "project_traffics"
   add_foreign_key "projects", "project_types"
   add_foreign_key "projects", "users"
+  add_foreign_key "specifications", "products"
+  add_foreign_key "specifications", "projects"
   add_foreign_key "users", "cities"
   add_foreign_key "users", "genders"
 end

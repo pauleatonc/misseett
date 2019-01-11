@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
+  get 'specifications/show'
+  resources :events
   resources :products do
-    resources :projects, only: :create
+    resources :specifications, only: :create
   end
 
-  resources :projects #, only: [:show, :edit, :update, :destroy, :index, :new]
-
+  resources :projects do
+    member do
+      post 'status_opened', to: 'projects#status_opened'
+      post 'status_closed', to: 'projects#status_closed'
+    end
+  end
   resources :states, only: :index
   resources :cities, only: :index
 
   get 'landing/index'
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'users/registrations'
+  }
   get 'user/show'
   resources :users, only: :show
 

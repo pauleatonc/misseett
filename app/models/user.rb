@@ -12,21 +12,30 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
-  def self.from_omniauth(access_token)
-    data = access_token.info
-    user = User.where(email: data['email']).first
+    def self.from_omniauth(access_token)
+      data = access_token.info
+      user = User.where(email: data['email']).first
 
-    # Uncommentthesectionbelowifyouwantusersto be created if they don't exist
-      unless user
-          user = User.create(
-            email: data['email'],
-            firstname: data['first_name'],
-            lastname: data['last_name'],
-            avatar:  data['picture'],
-            password: Devise.friendly_token[0, 20]
-          )
+      # Uncommentthesectionbelowifyouwantusersto be created if they don't exist
+        unless user
+            user = User.create(
+              email: data['email'],
+              firstname: data['first_name'],
+              lastname: data['last_name'],
+              avatar:  data['picture'],
+              password: Devise.friendly_token[0, 20]
+            )
+        end
+        user
+    end
 
-      end
-      user
-  end
+    def update_without_password(params, *options)
+     if params[:password].blank?
+       params.delete(:password)
+       params.delete(:password_confirmation) if params[:password_confirmation].blank?
+     end
+     result = update_attributes(params, *options)
+     clean_up_passwords
+     result
+   end
 end

@@ -15,6 +15,12 @@
         </tr>
       </thead>
       <tbody>
+        <div class="">
+          <div class="field">
+            <%= f.label :project_id %>
+            <%= collection_select(:specification, :project_id, Project.all, :id, :name, prompt: true) %>
+          </div>
+        </div>
           <!-- <div class="row" > -->
             <% @products.each do |product| %>
             <!-- <div class="col-md-4 col-sm-1">
@@ -37,7 +43,7 @@
                   <%= link_to 'Show', product %>
                   <%= link_to 'Edit', edit_product_path(product) %>
                   <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-                  <%= link_to 'Agregar', product_projects_path(product), class: 'btn btn-success', method: :post%>
+                  <%= link_to 'Agregar', product_specifications_path(product), class: 'btn btn-success', method: :post%>
                 </td>
               </tr>
               <!-- </div>
@@ -78,7 +84,7 @@
         <%= link_to 'Show', product %>
         <%= link_to 'Edit', edit_product_path(product) %>
         <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Agregar', product_projects_path(product), class: 'btn btn-success', method: :post%>
+        <%= link_to 'Agregar', product_specifications_path(product), class: 'btn btn-success', method: :post%>
     </div>
   </tr>
   <% end %>
