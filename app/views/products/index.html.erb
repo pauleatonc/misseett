@@ -1,91 +1,52 @@
 <body>
-<div class="container">
+  <div class="container">
 
     <p id="notice"><%= notice %></p>
 
     <h1>Products</h1>
     <h1 class="center">Titulo</h1>
-
     <table id="myTable" class="table">
       <thead>
         <tr>
-          <th>Imagen</th>
+          <th>Imagen</</th>
           <th>descripcion</th>
           <th>opciones</th>
         </tr>
       </thead>
       <tbody>
-        <div class="">
-          <div class="field">
-            <%= f.label :project_id %>
-            <%= collection_select(:specification, :project_id, Project.all, :id, :name, prompt: true) %>
-          </div>
-        </div>
-          <!-- <div class="row" > -->
-            <% @products.each do |product| %>
-            <!-- <div class="col-md-4 col-sm-1">
-              <div class="body"> -->
-              <tr>
-                <td>
-                  <% if product.images.attached? %>
-                    <%= image_tag product.images.first.variant(resize: "200x200") %></td>
-                  <% else %>
-                    <%= image_tag("seeds.png", size: "200x200") %></td>
-                  <% end %>
-                <td>
-                  <h3> <%= product.title %> </h3>
-                  <p> <%= product.description %> </p>
-                  <h6> <%= product.project_traffic.category %></h6>
-                  <h6> <%= product.project_type.category %></h6>
-                  <h6> Marca: <%= product.company.name %></h6>
-                </td>
-                <td>
-                  <%= link_to 'Show', product %>
-                  <%= link_to 'Edit', edit_product_path(product) %>
-                  <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-                  <%= link_to 'Agregar', product_specifications_path(product), class: 'btn btn-success', method: :post%>
-                </td>
-              </tr>
-              <!-- </div>
-            </div> -->
+        <% @products.each do |product| %>
+          <tr>
+            <% if product.images.attached? %>
+              <td>
+                <%= image_tag product.images.first.variant(resize: "200x200") %></td>
+            <% else %>
+              <td>
+                <%= image_tag("seeds.png", size: "200x200") %></td>
             <% end %>
-          <!-- </div> -->
-
+            <td>
+              <h3><%= product.title %></h3>
+              <p><%= product.description %></p>
+              <h6><%= product.project_traffic.category %></h6>
+              <h6><%= product.project_type.category %></h6>
+              <h6>Marca:<%= product.company.name %></h6>
+            </td>
+            <td>
+              <%= link_to 'Show', product %>
+              <%= link_to 'Edit', edit_product_path(product) %>
+              <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Agregar', project_product_specifications_path(params[:project_id], product), class: 'btn btn-success', method: :post %>
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
     <br>
     <%= link_to 'New Product', new_product_path %>
-</div>
-  <script>
-  $(document).ready( function () {
-      $('#myTable').DataTable();
-  } );
-  </script>
+  </div>
 </body>
 
-
-<!-- BACKUP
-
-<div class="row" id="myTable">
-  <% @products.each do |product| %>
-  <tr class="col-md-4 col-sm-1">
-    <div class="body">
-      <p>
-        <% if product.images.attached? %>
-          <%= image_tag product.images.first.variant(resize: "200x200") %></p>
-        <% else %>
-          <%= image_tag("seeds.png", size: "200x200") %></p>
-        <% end %>
-      <h3><%= product.title %></h3>
-      <p><%= product.description %></p>
-      <h5><%= product.project_traffic.category %></h5>
-      <h5><%= product.project_type.category %></h5>
-      <h4><%= product.company.name %></h4>
-        <%= link_to 'Show', product %>
-        <%= link_to 'Edit', edit_product_path(product) %>
-        <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Agregar', product_specifications_path(product), class: 'btn btn-success', method: :post%>
-    </div>
-  </tr>
-  <% end %>
-</div -->
+<script>
+  $(document).ready(function () {
+    $('#myTable').DataTable();
+  });
+</script>

@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   get 'specifications/show'
   resources :events
-  resources :products do
-    resources :specifications, only: :create
-  end
+  resources :products
 
   resources :projects do
     member do
@@ -11,6 +9,13 @@ Rails.application.routes.draw do
       post 'status_closed', to: 'projects#status_closed'
     end
   end
+
+  resources :projects do
+   resources :products, only: [:create, :destroy, :show, :index] do
+     resources :specifications, only: :create
+    end
+  end
+
   resources :states, only: :index
   resources :cities, only: :index
 

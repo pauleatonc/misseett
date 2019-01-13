@@ -14,9 +14,9 @@ class SpecificationsController < ApplicationController
 
     @specification = Specification.new(product_id: @product.id, project_id: @project.id)
     if @specification.save!
-      redirect_to products_path, notice: 'La orden ha sido ingresada'
+      redirect_to project_products_path, notice: 'La orden ha sido ingresada'
     else
-      redirect_to products_path, alert: 'la orden no ha podido ser ingresada'
+      redirect_to project_products_path, alert: 'la orden no ha podido ser ingresada'
     end
   end
 end
