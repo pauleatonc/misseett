@@ -6,6 +6,7 @@ class Project < ApplicationRecord
   belongs_to :project_traffic
   belongs_to :city
   has_many :events
+  resourcify
 
   def title
     name

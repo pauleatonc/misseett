@@ -9,7 +9,7 @@
 User.destroy_all
 Gender.destroy_all
 Product.destroy_all
-Company.destroy_all
+Brand.destroy_all
 Continent.destroy_all
 Country.destroy_all
 State.destroy_all
@@ -75,7 +75,7 @@ continen_nil = Continent.create(name: 'nil')
 
 traffic = ProjectTraffic.create(category: "Alto Trafico")
 type= ProjectType.create(category: "Institucional")
-company = Company.create!([{name: "Simonswerk", city: noncities}, {name: "", city: noncities}])
+brand = Brand.create!([{name: "Simonswerk", city: noncities}, {name: "", city: noncities}])
 product_type = ProductType.create!([{name: 'Puertas de Madera'}, {name: 'Quincalleria'}, {name: 'Puertas Metálicas'}])
 
   15.times do
@@ -86,7 +86,7 @@ product_type = ProductType.create!([{name: 'Puertas de Madera'}, {name: 'Quincal
   project_traffic: traffic,
   project_type: type,
   product_type: product_type.first,
-  company: company.first
+  brand: brand.first
 
     )
   end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :brands
   get 'specifications/show'
   resources :events
   resources :products

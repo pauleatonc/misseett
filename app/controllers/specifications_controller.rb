@@ -19,4 +19,8 @@ class SpecificationsController < ApplicationController
       redirect_to project_products_path, alert: 'la orden no ha podido ser ingresada'
     end
   end
+
+  private
+
+
 end

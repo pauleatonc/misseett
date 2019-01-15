@@ -12,6 +12,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
+  after_create :assign_default_role
+
     def self.from_omniauth(access_token)
       data = access_token.info
       user = User.where(email: data['email']).first
@@ -37,5 +39,9 @@ class User < ApplicationRecord
      result = update_attributes(params, *options)
      clean_up_passwords
      result
+   end
+
+   def assign_default_role
+     self.add_role(:regular_user) if self.roles.blank?
    end
 end

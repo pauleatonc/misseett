@@ -28,13 +28,17 @@
               <p><%= product.description %></p>
               <h6><%= product.project_traffic.category %></h6>
               <h6><%= product.project_type.category %></h6>
-              <h6>Marca:<%= product.company.name %></h6>
+              <h6>Marca:<%= product.brand.name %></h6>
             </td>
             <td>
               <%= link_to 'Show', product %>
               <%= link_to 'Edit', edit_product_path(product) %>
               <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-              <%= link_to 'Agregar', project_product_specifications_path(params[:project_id], product), class: 'btn btn-success', method: :post %>
+                <% if @project.present? %>
+                  <%= link_to 'Especificar', project_product_specifications_path(params[:project_id], product), class: 'btn btn-success', method: :post %>
+                <% else %>
+                  <%= link_to 'Especificar', projects_path, class: 'btn btn-success', method: :post %>
+                <% end %>
             </td>
           </tr>
         <% end %>
@@ -46,7 +50,7 @@
 </body>
 
 <script>
-  $(document).ready(function () {
+  $(document).ready(function() {
     $('#myTable').DataTable();
   });
 </script>
