@@ -1,6 +1,6 @@
 class BrandsController < ApplicationController
   before_action :set_brand, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource param_method: :my_sanitizer
+  load_and_authorize_resource
   # GET /brands
   # GET /brands.json
   def index
@@ -71,9 +71,5 @@ class BrandsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def brand_params
       params.require(:brand).permit(:name, :description, :contact, :email, :phone, :address, :city_id, :user_id)
-    end
-
-    def my_sanitizer
-      params.require(:brand).permit(brand_params)
     end
 end

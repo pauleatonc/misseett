@@ -52,7 +52,9 @@
     <%= collection_select(:product, :brand_id, Brand.all, :id, :name, prompt: true) %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <% if can? :update, Product %>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
 <% end %>

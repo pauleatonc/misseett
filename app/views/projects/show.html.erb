@@ -31,26 +31,32 @@
                 <strong>City:</strong>
                 <%= @project.city.name %>
               </p>
-
-              <%= link_to 'Editar informacion', edit_project_path(@project), class: "btn btn-secondary"%> |
+              <% if can? :edit, Project %>
+                <%= link_to 'Editar informacion', edit_project_path(@project), class: "btn btn-secondary"%> |
+              <% end %>
               <%= link_to 'Volver', projects_path, class: "btn btn-secondary" %>
       </div>
-      <div class="col-md-4">
-          <h3><%= link_to 'Especificar', project_products_path(@project), class: "btn btn-info" %></h3>
-      </div>
+      <% if can? :create, Specification %>
+        <div class="col-md-4">
+            <h3><%= link_to 'Especificar', project_products_path(@project), class: "btn btn-info" %></h3>
+        </div>
+      <% end %>
 
     </div>
   </div>
 
   <div class="container">
-    <% @project.products.each do |product| %>
+    <% @project.specifications.each do |specification| %>
       <tr>
         <td>
-          <h3><%= product.title %></h3>
-          <p><%= product.description %></p>
-          <h6>Referencia:<%= product.brand.name %></h6>
+          <h3><%= specification.product.title %></h3>
+          <p><%= specification.product.description %></p>
+          <h6>Referencia:<%= specification.product.brand.name %></h6>
         </td>
-        <td><%= link_to 'Show', product %></td>
+        <td><%= link_to 'Show', project_product_path(specification.product.brand_id, specification.product) %>
+          <% if can? :destroy, Specification %>
+            <%= link_to 'Eliminar', project_product_specification_path(@project.id, specification.product.id, :id => specification.id), method: :delete, data: { confirm: '¿Seguro quiere eliminar la especificación?' } %></td>
+          <% end %>
       </tr>
     <% end %>
   </div>

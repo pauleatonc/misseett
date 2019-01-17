@@ -53,9 +53,10 @@
       <%= form.label :city_id %><br />
       <%= form.grouped_collection_select :city_id, State.order(:name), :cities, :name, :id, :name, prompt: true %>
     </div>
-
-    <div class="actions">
-      <%= form.submit %>
-    </div>
+      <% if can? :update, Project %>
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+      <% end %>
   <% end %>
 </div>

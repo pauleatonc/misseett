@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource param_method: :my_sanitizer
-  
+  load_and_authorize_resource
+
   # GET /events
   # GET /events.json
   def index
@@ -75,9 +75,5 @@ class EventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:title, :description, :start, :end, :project_id)
-    end
-
-    def my_sanitizer
-      params.require(:event).permit(event_params)
     end
 end

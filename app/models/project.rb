@@ -16,7 +16,7 @@ class Project < ApplicationRecord
     created_at.strftime("%Y-%m-%d")
   end
 
-  def update
+  def update2
     updated_at.strftime("%Y-%m-%d")
   end
 

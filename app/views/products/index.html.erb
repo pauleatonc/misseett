@@ -4,6 +4,12 @@
     <p id="notice"><%= notice %></p>
 
     <h1>Products</h1>
+    <% if can? :create, Product %>
+      <div class="btn btn-info">
+        <%= link_to 'New Product', new_product_path %>
+      </div>
+    <% end %>
+
     <h1 class="center">Titulo</h1>
     <table id="myTable" class="table">
       <thead>
@@ -31,21 +37,29 @@
               <h6>Marca:<%= product.brand.name %></h6>
             </td>
             <td>
-              <%= link_to 'Show', product %>
-              <%= link_to 'Edit', edit_product_path(product) %>
-              <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-                <% if @project.present? %>
-                  <%= link_to 'Especificar', project_product_specifications_path(params[:project_id], product), class: 'btn btn-success', method: :post %>
+              <%= link_to 'Show', brand_product_path(product.brand_id, :id => product.id) %>
+
+              <% if can? :edit, Product %>
+                <%= link_to 'Edit', edit_brand_product_path(product.brand_id, :id => product.id) %>
+              <% end %>
+
+              <% if can? :destroy, Product %>
+                <%= link_to 'Destroy', brand_product_path(product.brand_id, :id => product.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% end %>
+
+              <% if params[:project_id].nil? %>
+                  <%= link_to 'Especificar', projects_path, class: 'btn btn-info
+                  ' %>
                 <% else %>
-                  <%= link_to 'Especificar', projects_path, class: 'btn btn-success', method: :post %>
+                  <% if can? :create, Specification %>
+                    <%= link_to 'Especificar', project_product_specifications_path(params[:project_id], product), class: 'btn btn-success', method: :post %>
                 <% end %>
+              <% end %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <br>
-    <%= link_to 'New Product', new_product_path %>
   </div>
 </body>
 

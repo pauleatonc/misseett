@@ -3,7 +3,11 @@
     <p id="notice"><%= notice %></p>
 
     <h1>Projects</h1>
-
+      <% if can? :create, Project %>
+        <div class="btn btn-info">
+          <%= link_to 'New Project', new_project_path %>
+        </div>
+      <% end %>
     <table id="myTable" class="table">
       <thead>
         <tr>
@@ -14,7 +18,9 @@
           <th>Tipo de Proyecto</th>
           <th>Trafico de Proyecto</th>
           <th>Ciudad</th>
-          <th>Status</th>
+            <% if can? :create, Project %>
+              <th>Status</th>
+            <% end %>
           <th>Opciones</th>
         </tr>
       </thead>
@@ -22,6 +28,7 @@
       <tbody>
         <% @projects.each do |project| %>
           <tr>
+            <% if can? :read, project %>
             <td><%= project.user.firstname + " " + project.user.lastname%></td>
             <td><%= project.name %></td>
             <td><%= project.description %></td>
@@ -29,26 +36,31 @@
             <td><%= project.project_type.category %></td>
             <td><%= project.project_traffic.category %></td>
             <td><%= project.city.name %></td>
-              <% if project.status_open == true %>
-                  <td><%= link_to 'Abierto', status_closed_project_path(project), class: 'btn btn-info', method: :post, data: { confirm: "¿Seguro quiere cerrar el proyecto #{project.name}?" } %></td>
-                <% else %>
-                  <td><%= link_to 'Cerrado', status_opened_project_path(project), class: 'btn btn-danger', method: :post, data: { confirm: "¿Seguro quiere reabrir el proyecto #{project.name}?" } %></td>
+
+              <% if can? :create, project %>
+                <% if project.status_open == true %>
+                    <td><%= link_to 'Abierto', status_closed_project_path(project), class: 'btn btn-info', method: :post, data: { confirm: "¿Seguro quiere cerrar el proyecto #{project.name}?" } %></td>
+                  <% else %>
+                    <td><%= link_to 'Cerrado', status_opened_project_path(project), class: 'btn btn-danger', method: :post, data: { confirm: "¿Seguro quiere reabrir el proyecto #{project.name}?" } %></td>
+                  <% end %>
                 <% end %>
-            <td><%= link_to 'Show', project %>
-            <%= link_to 'Edit', edit_project_path(project) %>
-            <%= link_to 'Destroy', project, method: :delete, data: { confirm: '¿Seguro quiere eliminar el proyecto?' } %></td>
+
+            <td><%= link_to 'Especificaciones', project %>
+                <% if can? :edit, project %>
+                  <%= link_to 'Editar', edit_project_path(project) %>
+                <% end %>
+                <% if can? :destroy, project %>
+                  <%= link_to 'Eliminar', project, method: :delete, data: { confirm: '¿Seguro quiere eliminar el proyecto?' } %></td>
+                <% end %>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
     </table>
 
-    <br>
-
-    <%= link_to 'New Project', new_project_path %>
-
   </div>
-
-<div id='calendar' class="container" data-token="<%= form_authenticity_token %>"></div>
-<%= render 'modal' %>
-
+    <% if can? :read, Event %>
+      <div id='calendar' class="container" data-token="<%= form_authenticity_token %>"></div>
+      <%= render 'modal' %>
+    <% end %>
 </body>

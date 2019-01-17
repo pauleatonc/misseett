@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  resources :brands
+  resources :brands do
+   resources :products, only: [:destroy, :edit, :show]
+ end
+
+ resources :products, only: [:new, :create, :index]
+
   get 'specifications/show'
   resources :events
-  resources :products
 
   resources :projects do
     member do
@@ -12,8 +16,8 @@ Rails.application.routes.draw do
   end
 
   resources :projects do
-   resources :products, only: [:create, :destroy, :show, :index] do
-     resources :specifications, only: :create
+   resources :products, only: [:index, :show] do
+     resources :specifications, only: [:create, :destroy]
     end
   end
 

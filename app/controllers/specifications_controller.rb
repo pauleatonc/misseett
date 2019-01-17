@@ -1,6 +1,6 @@
 class SpecificationsController < ApplicationController
   before_action :authenticate_user!
-
+  load_and_authorize_resource
   def index
     @specifications = Specifications.all
   end
@@ -20,7 +20,13 @@ class SpecificationsController < ApplicationController
     end
   end
 
-  private
 
-
+  def destroy
+    @project = Project.find(params[:project_id])
+    @specification.destroy
+    respond_to do |format|
+      format.html { redirect_to @project, notice: 'La especificación fue eliminada' }
+      format.json { head :no_content }
+    end
+  end
 end

@@ -39,9 +39,13 @@
       <strong>Brand:</strong>
       <%= @product.brand.name %>
     </p>
-
-    <%= link_to 'Edit', edit_product_path(@product) %> |
-    <%= link_to 'Back', products_path %>
-
+      <% if can? :edit, Product %>
+        <%= link_to 'Edit', edit_brand_product_path(@product) %> |
+      <% end %>
+      <% if params[:project_id].nil? %>
+        <%= link_to 'Back', products_path %>
+      <% else %>
+        <%= link_to 'Back', project_path(params[:project_id]) %>
+      <% end %>
   </div>
 </body>

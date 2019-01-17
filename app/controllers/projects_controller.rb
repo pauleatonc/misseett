@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy, :status_opened, :status_closed]
-  load_and_authorize_resource param_method: :my_sanitizer
+  load_and_authorize_resource
   # GET /projects
   # GET /projects.json
   def index
@@ -87,9 +87,5 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:user_id, :name, :description, :office, :project_type_id, :project_traffic_id, :city_id, :product_id)
-    end
-
-    def my_sanitizer
-      params.require(:project).permit(project_params)
     end
 end

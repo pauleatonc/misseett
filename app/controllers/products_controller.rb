@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource param_method: :my_sanitizer
+  load_and_authorize_resource
   # GET /products
   # GET /products.json
   def index
@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+    @brand = Brand.find(params[:id])
     @product = Product.new(product_params)
 
     respond_to do |format|
@@ -73,9 +74,5 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:title, :description, :eett, :project_traffic_id, :project_type_id,
         :product_type_id, :brand_id, images: [])
-    end
-
-    def my_sanitizer
-      params.require(:product).permit(product_params)
     end
 end
