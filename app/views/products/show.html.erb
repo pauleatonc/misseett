@@ -6,35 +6,29 @@
 
     <p>
       <%= @product.images.each do |image| %>
-      <%= image_tag image.variant(resize: "400x400") %><br />
+      <%= image_tag image.variant(resize: "400x400") %><br/>
       <% end %>
     </p>
-
     <p>
       <strong>Title:</strong>
       <%= @product.title %>
     </p>
-
     <p>
       <strong>Description:</strong>
       <%= @product.description %>
     </p>
-
     <p>
       <strong>Eett:</strong>
       <%= @product.eett %>
     </p>
-
     <p>
       <strong>Project traffic:</strong>
       <%= @product.project_traffic.category %>
     </p>
-
     <p>
       <strong>Project type:</strong>
       <%= @product.project_type.category %>
     </p>
-
     <p>
       <strong>Brand:</strong>
       <%= @product.brand.name %>
@@ -43,9 +37,12 @@
         <%= link_to 'Edit', edit_brand_product_path(@product) %> |
       <% end %>
       <% if params[:project_id].nil? %>
-        <%= link_to 'Back', products_path %>
+        <%= link_to 'Volver a Productos', products_path %>
       <% else %>
-        <%= link_to 'Back', project_path(params[:project_id]) %>
+        <%= link_to 'Volver a Productos', project_path(params[:project_id]) %>
       <% end %>
+      <p>
+        <%= link_to 'Proveedor', brand_path(@product.brand_id) %>
+      </p>
   </div>
 </body>

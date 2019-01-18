@@ -8,6 +8,10 @@
                 <%= @project.user.firstname + " " + @project.user.lastname %>
               </p>
               <p>
+                <strong>Fecha:</strong>
+                <%= @project.created_at %>
+              </p>
+              <p>
                 <strong>Name:</strong>
                 <%= @project.name %>
               </p>
@@ -30,6 +34,10 @@
               <p>
                 <strong>City:</strong>
                 <%= @project.city.name %>
+              </p>
+              <p>
+                <strong>Contacto:</strong>
+                <%= @project.user.email %>
               </p>
               <% if can? :edit, Project %>
                 <%= link_to 'Editar informacion', edit_project_path(@project), class: "btn btn-secondary"%> |

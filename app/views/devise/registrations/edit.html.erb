@@ -51,6 +51,12 @@
         <%= f.label :company %><br />
         <%= f.text_field :company, autofocus: true, autocomplete: "empresa" %>
       </div>
+      <% if can? :create, Brand %>
+        <div class="field">
+          <%= f.label :brand, 'Marca principal' %><br />
+          <%= collection_select(:user, :brand_id, User.find(current_user.id).brands, :id, :name, prompt: true) %>
+        </div>
+      <% end %>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

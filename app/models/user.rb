@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :projects
   has_many :products, through: :projects
+  has_many :brands
 
   belongs_to :city, optional: true
   belongs_to :gender, optional: true

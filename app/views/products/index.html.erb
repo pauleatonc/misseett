@@ -4,12 +4,10 @@
     <p id="notice"><%= notice %></p>
 
     <h1>Products</h1>
-    <% if can? :create, Product %>
-      <div class="btn btn-info">
-        <%= link_to 'New Product', new_product_path %>
-      </div>
-    <% end %>
-
+    <% if params[:project_id].nil? %>
+      <% else %>
+        <%= link_to 'Volver a Proyecto', project_path(params[:project_id]), class: 'btn btn-info' %>
+      <% end %>
     <h1 class="center">Titulo</h1>
     <table id="myTable" class="table">
       <thead>
@@ -48,8 +46,7 @@
               <% end %>
 
               <% if params[:project_id].nil? %>
-                  <%= link_to 'Especificar', projects_path, class: 'btn btn-info
-                  ' %>
+                  <%= link_to 'Especificar', projects_path, class: 'btn btn-info' %>
                 <% else %>
                   <% if can? :create, Specification %>
                     <%= link_to 'Especificar', project_product_specifications_path(params[:project_id], product), class: 'btn btn-success', method: :post %>

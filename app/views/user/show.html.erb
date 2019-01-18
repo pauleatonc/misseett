@@ -4,6 +4,22 @@
       <h1>Perfil</h1>
       <p>Revisa y completa tu perfil</p>
     </div>
+    <div class="">
+      <% if can? :create, Brand %>
+        <div class="jumbotron">
+            <p><%= @user.brands.find(@user.brand_id).logo %></p>
+            <p><%= @user.brands.find(@user.brand_id).name %></p>
+            <p><%= @user.brands.find(@user.brand_id).description %></p>
+            <p><%= @user.brands.find(@user.brand_id).contact %></p>
+            <p><%= @user.brands.find(@user.brand_id).email %></p>
+            <p><%= @user.brands.find(@user.brand_id).phone %></p>
+            <p><%= @user.brands.find(@user.brand_id).address %></p>
+            <p><%= @user.brands.find(@user.brand_id).city %></p>
+        </div>
+        <% end %>
+      </div>
+
+
     <div class="jumbotron">
       <div class="container">
         <div class="float-left">
@@ -13,42 +29,26 @@
           <%= image_tag("avaregeavatar.png", size: "250x250") %>
           <% end %>
         </div>
-        <div class="float-right">
-          <a href="<%= edit_user_registration_path %>" class="btn btn-info" role="button">Editar Perfil</a>
-        </div>
       </div>
       <div class="container">
-        <p>
-          <strong>Nombre:</strong>
-          <%= @user.firstname %>
-        </p>
-        <p>
-          <strong>Apellido:</strong>
-          <%= @user.lastname %>
-        </p>
-        <p>
-          <strong>Email:</strong>
-          <%= @user.email %>
-        </p>
-        <p>
-          <strong>Genero:</strong>
+        <p><strong>Nombre:</strong><%= @user.firstname %></p>
+        <p><strong>Apellido:</strong><%= @user.lastname %></p>
+        <p><strong>Email:</strong><%= @user.email %></p>
+        <p><strong>Genero:</strong>
           <% if @user.gender.nil? %>
             <a>Completar</a>
           <% else %>
             <%= @user.gender.name %>
           <% end %>
         </p>
-        <p>
-          <strong>Empresa:</strong>
+        <p><strong>Empresa:</strong>
           <% if @user.company.nil? %>
           <a>Completar</a>
         <% else %>
           <%= @user.company %>
         <% end %>
         </p>
-
-        <p>
-          <strong>Ciudad:</strong>
+        <p><strong>Ciudad:</strong>
           <% if @user.city.nil? %>
             <a>Completar</a>
           <% else %>
@@ -56,6 +56,35 @@
           <% end %>
           </p>
         </div>
+        <div class="">
+          <% if can? :create, Brand %>
+          <div class="">
+            <a href="<%= edit_user_registration_path %>" class="btn btn-info" role="button">Editar Perfil</a>
+          </div>
+          <div class="">
+            <a href="<%= new_product_path %>" class="btn btn-info" role="button">Crear Producto</a
+          </div>
+          <div class="">
+            <a href="<%= new_brand_path %>" class="btn btn-info" role="button">Crear Marca</a
+          </div>
+          <div class="">
+            <a href="<%= projects_path %>" class="btn btn-info" role="button">Ver Proyectos Especificados</a
+          </div>
+          <% end %>
+        </div>
       </div>
+      <% if can? :create, Brand %>
+        <div class="jumbotron">
+          <% @user.brands.each do |brand| %>
+            <div class="card">
+              <p><%= brand.logo %></p>
+              <p><%= brand.name %></p>
+              <%= link_to 'Show', brand_path(brand.id) %>
+              <%= link_to 'Edit', edit_brand_path(brand.id) %>
+              <%= link_to 'Destroy', brand, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </body>
