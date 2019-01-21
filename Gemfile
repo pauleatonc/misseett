@@ -14,8 +14,8 @@ gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 # Google authenticate
 gem 'omniauth-google-oauth2'
-# JavaScript
-
+# tinymce
+gem 'tinymce-rails'
 # Cancancan for authorizations
 gem 'cancancan'
 # Rolify for Role managment

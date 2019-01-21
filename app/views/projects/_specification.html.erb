@@ -1,0 +1,5 @@
+<% @project.specifications.each do |specification| %>
+      <h3><%= specification.product.title %></h3>
+      <p><%= specification.product.description %></p>
+      <h6>Referencia:<%= specification.product.brand.name %></h6>
+<% end %>

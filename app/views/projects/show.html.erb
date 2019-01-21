@@ -52,21 +52,35 @@
 
     </div>
   </div>
-
-  <div class="container">
-    <% @project.specifications.each do |specification| %>
-      <tr>
-        <td>
-          <h3><%= specification.product.title %></h3>
-          <p><%= specification.product.description %></p>
-          <h6>Referencia:<%= specification.product.brand.name %></h6>
-        </td>
-        <td><%= link_to 'Show', project_product_path(specification.product.brand_id, specification.product) %>
-          <% if can? :destroy, Specification %>
-            <%= link_to 'Eliminar', project_product_specification_path(@project.id, specification.product.id, :id => specification.id), method: :delete, data: { confirm: '¿Seguro quiere eliminar la especificación?' } %></td>
-          <% end %>
-      </tr>
-    <% end %>
+<div class="container ">
+  <div class="row">
+    <div class="col-md-5">
+      <% @project.specifications.each do |specification| %>
+        <tr>
+          <td>
+            <h3><%= specification.product.title %></h3>
+            <p><%= specification.product.description %></p>
+            <h6>Referencia:<%= specification.product.brand.name %></h6>
+          </td>
+          <td><%= link_to 'Show', project_product_path(specification.product.brand_id, specification.product) %>
+            <% if can? :destroy, Specification %>
+              <%= link_to 'Eliminar', project_product_specification_path(@project.id, specification.product.id, :id => specification.id), method: :delete, data: { confirm: '¿Seguro quiere eliminar la especificación?' } %></td>
+            <% end %>
+        </tr>
+      <% end %>
+    </div>
+    <div class="col-md-7 float-right">
+      <%= text_area_tag :content, (render partial: "specification") , :class => "tinymce", :rows => 40, :cols => 120 %>
+      <%= tinymce %>
+    </div>
   </div>
+</div>
+
+
+
+
+
+
+
 
 </body>
