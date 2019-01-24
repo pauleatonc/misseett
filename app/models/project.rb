@@ -13,16 +13,14 @@ class Project < ApplicationRecord
   end
 
   def date
-    created_at.strftime("%Y-%m-%d")
+    created_at.strftime('%Y-%m-%d')
   end
 
   def update2
-    updated_at.strftime("%Y-%m-%d")
+    updated_at.strftime('%Y-%m-%d')
   end
 
   def type
     project_type.category
   end
-
-
 end

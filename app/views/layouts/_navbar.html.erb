@@ -1,21 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="<%= landing_index_path %>">Inicio <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="<%= root_path %>">Inicio
+          <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href= "<%= projects_path %>" >Mis EETT</a>
+        <a class="nav-link" href="<%= projects_path %>">Mis EETT</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<%= products_path %>"> Productos </a>
+        <a class="nav-link" href="<%= products_path %>">
+          Productos
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<%= brands_path %>"> Proveedores </a>
+        <a class="nav-link" href="<%= brands_path %>">
+          Proveedores
+        </a>
       </li>
     </ul>
     <div class="dropdown">
@@ -25,22 +30,22 @@
             <%= image_tag current_user.avatar.variant(resize: "60x60"), class: 'rounded-circle' %>
             <%= current_user.email %>
           <% else %>
-          <%= image_tag("avaregeavatar.png", size: "60x60") %>
-          <%= current_user.email %>
+            <%= image_tag("avaregeavatar.png", size: "60x60") %>
+            <%= current_user.email %>
           <% end %>
         <% else %>
           Ingreso
         <% end %>
       </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <% if user_signed_in? %>
-            <a class="dropdown-item" href="<%= user_show_path %>">Perfil</a>
-            <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="DELETE">Cerrar Sesión</a>
-          <% else %>
-            <a class="dropdown-item" href="<%= new_user_session_path %>">Iniciar Sesión</a>
-            <a class="dropdown-item" href="<%= new_user_registration_path %>">Registrarse</a>
-          <% end %>
-        </div>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% if user_signed_in? %>
+          <a class="dropdown-item" href="<%= user_show_path %>">Perfil</a>
+          <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="DELETE">Cerrar Sesión</a>
+        <% else %>
+          <a class="dropdown-item" href="<%= new_user_session_path %>">Iniciar Sesión</a>
+          <a class="dropdown-item" href="<%= new_user_registration_path %>">Registrarse</a>
+        <% end %>
+      </div>
     </div>
   </div>
 </nav>

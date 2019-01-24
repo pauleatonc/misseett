@@ -1,62 +1,64 @@
 <div class="container">
   <%= form_with(model: project, local: true) do |form| %>
-    <% if project.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+  <% if project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %>
+        prohibited this project from being saved:</h2>
 
-        <ul>
+      <ul>
         <% project.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <p><%= current_user.firstname + " " + current_user.lastname %> estas iniciando un nuevo proyecto</p>
-
-    <div class="field">
-      <%= form.label :name %>
-      <%= form.text_field :name %>
+      </ul>
     </div>
-
-    <div class="field">
-      <%= form.label :description %>
-      <%= form.text_area :description %>
-    </div>
-
-    <div class="field">
-      <%= form.label :office %>
-      <%= form.text_field :office %>
-    </div>
-
-    <div class="field">
-      <%= form.label :project_traffic_id %>
-      <%= collection_select(:project, :project_traffic_id, ProjectTraffic.all, :id, :category, prompt: true) %>
-    </div>
-
-    <div class="field">
-      <%= form.label :project_type_id %>
-      <%= collection_select(:project, :project_type_id, ProjectType.all, :id, :category, prompt: true) %>
-    </div>
-
-    <div class="field">
-      <%= form.label :country %><br />
-      <%= collection_select(:state, :country_id, Country.all, :id, :name, prompt: true) %>
-    </div>
-
-    <div class="field">
-      <%= form.label :state %><br />
-      <%= form.grouped_collection_select :city_id, Country.order(:name), :states, :name, :id, :name, prompt: true %>
-    </div>
-
-    <div class="field">
-      <%= form.label :city_id %><br />
-      <%= form.grouped_collection_select :city_id, State.order(:name), :cities, :name, :id, :name, prompt: true %>
-    </div>
-      <% if can? :update, Project %>
-        <div class="actions">
-          <%= form.submit %>
-        </div>
-      <% end %>
   <% end %>
+
+  <p><%= current_user.firstname + " " + current_user.lastname %>
+    estas iniciando un nuevo proyecto</p>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :office %>
+    <%= form.text_field :office %>
+  </div>
+
+  <div class="field">
+    <%= form.label :project_traffic_id %>
+    <%= collection_select(:project, :project_traffic_id, ProjectTraffic.all, :id, :category, prompt: true) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :project_type_id %>
+    <%= collection_select(:project, :project_type_id, ProjectType.all, :id, :category, prompt: true) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %><br/>
+    <%= collection_select(:state, :country_id, Country.all, :id, :name, prompt: true) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %><br/>
+    <%= form.grouped_collection_select :city_id, Country.order(:name), :states, :name, :id, :name, prompt: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city_id %><br/>
+    <%= form.grouped_collection_select :city_id, State.order(:name), :cities, :name, :id, :name, prompt: true %>
+  </div>
+  <% if can? :update, Project %>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+<% end %>
 </div>

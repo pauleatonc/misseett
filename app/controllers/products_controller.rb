@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: %i[show edit update destroy]
   load_and_authorize_resource
   # GET /products
   # GET /products.json
@@ -20,8 +20,7 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /products
   # POST /products.json
@@ -64,14 +63,15 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.require(:product).permit(:title, :description, :eett, :project_traffic_id, :project_type_id,
-        :product_type_id, :brand_id, images: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_params
+    params.require(:product).permit(:title, :description, :eett, :project_traffic_id, :project_type_id,
+                                    :product_type_id, :brand_id, images: [])
+  end
 end

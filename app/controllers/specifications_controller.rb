@@ -5,8 +5,7 @@ class SpecificationsController < ApplicationController
     @specifications = Specifications.all
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @product = Product.find(params[:product_id])
@@ -19,7 +18,6 @@ class SpecificationsController < ApplicationController
       redirect_to project_products_path, alert: 'la orden no ha podido ser ingresada'
     end
   end
-
 
   def destroy
     @project = Project.find(params[:project_id])

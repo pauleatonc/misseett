@@ -3,7 +3,6 @@ class Event < ApplicationRecord
   has_one :user, through: :projects
   resourcify
   def editable?
-    Date.today < start ? true : false
+    Date.today < start
   end
-
 end

@@ -1,0 +1,4 @@
+<% if can? :read, Event %>
+  <div id='calendar' class="container" data-token="<%= form_authenticity_token %>"></div>
+  <%= render 'modal' %>
+<% end %>

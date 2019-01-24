@@ -1,5 +1,5 @@
 class BrandsController < ApplicationController
-  before_action :set_brand, only: [:show, :edit, :update, :destroy]
+  before_action :set_brand, only: %i[show edit update destroy]
   load_and_authorize_resource
   # GET /brands
   # GET /brands.json
@@ -9,7 +9,7 @@ class BrandsController < ApplicationController
 
   # GET /brands/1
   # GET /brands/1.json
-  def show
+  def show;
   end
 
   # GET /brands/new
@@ -18,7 +18,7 @@ class BrandsController < ApplicationController
   end
 
   # GET /brands/1/edit
-  def edit
+  def edit;
   end
 
   # POST /brands
@@ -63,13 +63,14 @@ class BrandsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_brand
-      @brand = Brand.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def brand_params
-      params.require(:brand).permit(:name, :description, :contact, :email, :phone, :address, :city_id, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_brand
+    @brand = Brand.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def brand_params
+    params.require(:brand).permit(:name, :description, :contact, :email, :phone, :address, :city_id, :user_id)
+  end
 end

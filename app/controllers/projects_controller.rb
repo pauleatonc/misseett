@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :status_opened, :status_closed]
+  before_action :set_project, only: %i[show edit update destroy status_opened status_closed]
   load_and_authorize_resource
   # GET /projects
   # GET /projects.json
@@ -52,7 +52,6 @@ class ProjectsController < ApplicationController
     redirect_to projects_path, notice: 'Se ha cambiado el status del proyecto'
   end
 
-
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
@@ -79,13 +78,14 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:user_id, :name, :description, :office, :project_type_id, :project_traffic_id, :city_id, :product_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:user_id, :name, :description, :office, :project_type_id, :project_traffic_id, :city_id, :product_id)
+  end
 end

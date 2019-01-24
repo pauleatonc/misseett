@@ -1,63 +1,58 @@
-<body >
-  <div class="container">
-    <div class="jumbotron">
-      <div class="col-md-4">
-        <p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="jumbotron">
+    <div class="col-md-4">
+      <p id="notice"><%= notice %></p>
 
-          <p>
-            <strong>Name:</strong>
-            <%= @brand.name %>
-          </p>
-          <p>
-            <strong>Description:</strong>
-            <%= @brand.description %>
-          </p>
-          <p>
-            <strong>Contact:</strong>
-            <%= @brand.contact %>
-          </p>
-          <p>
-            <strong>Email:</strong>
-            <%= @brand.email %>
-          </p>
-          <p>
-            <strong>Phone:</strong>
-            <%= @brand.phone %>
-          </p>
-          <p>
-            <strong>Address:</strong>
-            <%= @brand.address %>
-          </p>
-          <p>
-            <strong>City:</strong>
-            <%= @brand.city.name %>
-          </p>
-          <p>
-            <strong>User:</strong>
-            <%= @brand.user %>
-          </p>
+      <p>
+        <strong>Name:</strong>
+        <%= @brand.name %>
+      </p>
+      <p>
+        <strong>Description:</strong>
+        <%= @brand.description %>
+      </p>
+      <p>
+        <strong>Contact:</strong>
+        <%= @brand.contact %>
+      </p>
+      <p>
+        <strong>Email:</strong>
+        <%= @brand.email %>
+      </p>
+      <p>
+        <strong>Phone:</strong>
+        <%= @brand.phone %>
+      </p>
+      <p>
+        <strong>Address:</strong>
+        <%= @brand.address %>
+      </p>
+      <p>
+        <strong>City:</strong>
+        <%= @brand.city.name %>
+      </p>
+      <p>
+        <strong>User:</strong>
+        <%= @brand.user %>
+      </p>
 
-        </div>
-      </div>
     </div>
+  </div>
+</div>
 
-    <div class="container">
-      <% @brand.products.each do |brand| %>
-        <tr>
-          <td>
-            <h3><%= brand.title %></h3>
-            <p><%= brand.description %></p>
-            <h6>Referencia:<%= brand.title %></h6>
-          </td>
-          <td><%= link_to 'Show', brand_product_path(brand.brand_id, :id => brand.id) %>
-        </tr>
-      <% end %>
-    </div>
+<div class="container">
+  <% @brand.products.each do |brand| %>
+    <tr>
+      <td>
+        <h3><%= brand.title %></h3>
+        <p><%= brand.description %></p>
+        <h6>Referencia:<%= brand.title %></h6>
+      </td>
+      <td><%= link_to 'Show', brand_product_path(brand.brand_id, :id => brand.id) %>
+      </tr>
+    <% end %>
+  </div>
 
-
-    <%= link_to 'Edit', edit_brand_path(@brand) %> |
-    <%= link_to 'Back', brands_path %>
-
-
-
-</body>
+  <%= link_to 'Edit', edit_brand_path(@brand) %>
+  |
+  <%= link_to 'Back', brands_path %>

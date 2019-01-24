@@ -1,90 +1,100 @@
-<body>
-  <div class="container">
-    <div class="conteiner">
-      <h1>Perfil</h1>
-      <p>Revisa y completa tu perfil</p>
-    </div>
-    <div class="">
-      <% if can? :create, Brand %>
-        <div class="jumbotron">
-            <p><%= @user.brands.find(@user.brand_id).logo %></p>
-            <p><%= @user.brands.find(@user.brand_id).name %></p>
-            <p><%= @user.brands.find(@user.brand_id).description %></p>
-            <p><%= @user.brands.find(@user.brand_id).contact %></p>
-            <p><%= @user.brands.find(@user.brand_id).email %></p>
-            <p><%= @user.brands.find(@user.brand_id).phone %></p>
-            <p><%= @user.brands.find(@user.brand_id).address %></p>
-            <p><%= @user.brands.find(@user.brand_id).city %></p>
-        </div>
+<div class="container">
+  <div class="conteiner">
+    <h1>Perfil</h1>
+    <p>Revisa y completa tu perfil</p>
+  </div>
+  <div class="">
+    <% if can? :create, Brand %>
+      <div class="jumbotron">
+        <p> <%= @user_brand.logo %> </p>
+        <p> <%= @user_brand.name %> </p>
+        <p> <%= @user_brand.description %> </p>
+        <p> <%= @user_brand.contact %> </p>
+        <p> <%= @user_brand.email %> </p>
+        <p> <%= @user_brand.phone %> </p>
+        <p> <%= @user_brand.address %> </p>
+        <p> <%= @user_brand.city.name %> </p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="jumbotron">
+    <div class="container">
+      <div class="float-left">
+        <% if @user.avatar.attached? %>
+          <%= image_tag current_user.avatar.variant(resize: "200x200") %>
+        <% else %>
+          <%= image_tag("avaregeavatar.png", size: "250x250") %>
         <% end %>
       </div>
-
-
-    <div class="jumbotron">
-      <div class="container">
-        <div class="float-left">
-          <% if @user.avatar.attached? %>
-            <%= image_tag current_user.avatar.variant(resize: "200x200") %>
-          <% else %>
-          <%= image_tag("avaregeavatar.png", size: "250x250") %>
-          <% end %>
-        </div>
-      </div>
-      <div class="container">
-        <p><strong>Nombre:</strong><%= @user.firstname %></p>
-        <p><strong>Apellido:</strong><%= @user.lastname %></p>
-        <p><strong>Email:</strong><%= @user.email %></p>
-        <p><strong>Genero:</strong>
-          <% if @user.gender.nil? %>
-            <a>Completar</a>
-          <% else %>
-            <%= @user.gender.name %>
-          <% end %>
-        </p>
-        <p><strong>Empresa:</strong>
-          <% if @user.company.nil? %>
+    </div>
+    <div class="container">
+      <p>
+        <strong>Nombre:</strong><%= @user.firstname %></p>
+      <p>
+        <strong>Apellido:</strong><%= @user.lastname %></p>
+      <p>
+        <strong>Email:</strong><%= @user.email %></p>
+      <p>
+        <strong>Genero:</strong>
+        <% if @user.gender.nil? %>
+          <a>Completar</a>
+        <% else %>
+          <%= @user.gender.name %>
+        <% end %>
+      </p>
+      <p>
+        <strong>Empresa:</strong>
+        <% if @user.company.nil? %>
           <a>Completar</a>
         <% else %>
           <%= @user.company %>
         <% end %>
-        </p>
-        <p><strong>Ciudad:</strong>
-          <% if @user.city.nil? %>
-            <a>Completar</a>
-          <% else %>
-            <%= @user.city %>
-          <% end %>
-          </p>
+      </p>
+      <p>
+        <strong>Ciudad:</strong>
+        <% if @user.city.nil? %>
+          <a>Completar</a>
+        <% else %>
+          <%= @user.city.name %>
+        <% end %>
+      </p>
+    </div>
+    <div class="">
+      <% if can? :create, Brand %>
+        <div class="">
+          <a href="<%= edit_user_registration_path %>" class="btn btn-info" role="button">Editar Perfil</a>
         </div>
         <div class="">
-          <% if can? :create, Brand %>
-          <div class="">
-            <a href="<%= edit_user_registration_path %>" class="btn btn-info" role="button">Editar Perfil</a>
-          </div>
-          <div class="">
-            <a href="<%= new_product_path %>" class="btn btn-info" role="button">Crear Producto</a
-          </div>
-          <div class="">
-            <a href="<%= new_brand_path %>" class="btn btn-info" role="button">Crear Marca</a
-          </div>
-          <div class="">
-            <a href="<%= projects_path %>" class="btn btn-info" role="button">Ver Proyectos Especificados</a
-          </div>
-          <% end %>
+          <a href="<%= new_product_path %>" class="btn btn-info" role="button">Crear Producto</a>
         </div>
-      </div>
-      <% if can? :create, Brand %>
-        <div class="jumbotron">
-          <% @user.brands.each do |brand| %>
-            <div class="card">
-              <p><%= brand.logo %></p>
-              <p><%= brand.name %></p>
-              <%= link_to 'Show', brand_path(brand.id) %>
-              <%= link_to 'Edit', edit_brand_path(brand.id) %>
-              <%= link_to 'Destroy', brand, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
-          <% end %>
+        <div class="">
+          <a href="<%= new_brand_path %>" class="btn btn-info" role="button">Crear Marca</a>
+        </div>
+        <div class="">
+          <a href="<%= projects_path %>" class="btn btn-info" role="button">Ver Proyectos Especificados</a>
         </div>
       <% end %>
     </div>
-  </body>
+  </div>
+
+  <% if can? :create, Brand %>
+    <div class="jumbotron">
+      <% @user.brands.each do |brand| %>
+        <div class="card col-md-3">
+          <% if brand.logo.attached? %>
+            <td>
+              <%= image_tag brand.logo.first.variant(resize: "200x200") %></td>
+          <% else %>
+            <td>
+              <%= image_tag("seeds.png", size: "200x200") %></td>
+          <% end %>
+          <p><%= brand.name %></p>
+          <%= link_to 'Show', brand_path(brand.id) %>
+          <%= link_to 'Edit', edit_brand_path(brand.id) %>
+          <%= link_to 'Destroy', brand, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

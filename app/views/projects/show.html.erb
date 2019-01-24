@@ -1,57 +1,57 @@
-<body >
-  <div class="container">
-    <div class="jumbotron">
-      <div class="col-md-4">
-              <p id="notice"><%= notice %></p>
-              <p>
-                <strong>User:</strong>
-                <%= @project.user.firstname + " " + @project.user.lastname %>
-              </p>
-              <p>
-                <strong>Fecha:</strong>
-                <%= @project.created_at %>
-              </p>
-              <p>
-                <strong>Name:</strong>
-                <%= @project.name %>
-              </p>
-              <p>
-                <strong>Description:</strong>
-                <%= @project.description %>
-              </p>
-              <p>
-                <strong>Office:</strong>
-                <%= @project.office %>
-              </p>
-              <p>
-                <strong>Project type:</strong>
-                <%= @project.project_type.category %>
-              </p>
-              <p>
-                <strong>Project traffic:</strong>
-                <%= @project.project_traffic.category %>
-              </p>
-              <p>
-                <strong>City:</strong>
-                <%= @project.city.name %>
-              </p>
-              <p>
-                <strong>Contacto:</strong>
-                <%= @project.user.email %>
-              </p>
-              <% if can? :edit, Project %>
-                <%= link_to 'Editar informacion', edit_project_path(@project), class: "btn btn-secondary"%> |
-              <% end %>
-              <%= link_to 'Volver', projects_path, class: "btn btn-secondary" %>
-      </div>
-      <% if can? :create, Specification %>
-        <div class="col-md-4">
-            <h3><%= link_to 'Especificar', project_products_path(@project), class: "btn btn-info" %></h3>
-        </div>
-      <% end %>
+<div class="container">
+  <div class="jumbotron">
+    <div class="col-md-4">
+      <p id="notice"><%= notice %></p>
+      <p>
+        <strong>User:</strong>
+        <%= @project.user.firstname + " " + @project.user.lastname %>
+      </p>
+      <p>
+        <strong>Fecha:</strong>
+        <%= @project.created_at %>
+      </p>
+      <p>
+        <strong>Name:</strong>
+        <%= @project.name %>
+      </p>
+      <p>
+        <strong>Description:</strong>
+        <%= @project.description %>
+      </p>
+      <p>
+        <strong>Office:</strong>
+        <%= @project.office %>
+      </p>
+      <p>
+        <strong>Project type:</strong>
+        <%= @project.project_type.category %>
+      </p>
+      <p>
+        <strong>Project traffic:</strong>
+        <%= @project.project_traffic.category %>
+      </p>
+      <p>
+        <strong>City:</strong>
+        <%= @project.city.name %>
+      </p>
+      <p>
+        <strong>Contacto:</strong>
+        <%= @project.user.email %>
+      </p>
+      <% if can? :edit, Project %>
+        <%= link_to 'Editar informacion', edit_project_path(@project), class: "btn btn-secondary"%>
 
+      <% end %>
+      <%= link_to 'Volver', projects_path, class: "btn btn-secondary" %>
     </div>
+    <% if can? :create, Specification %>
+      <div class="col-md-4">
+        <h3><%= link_to 'Especificar', project_products_path(@project), class: "btn btn-info" %></h3>
+      </div>
+    <% end %>
+
   </div>
+</div>
 <div class="container ">
   <div class="row">
     <div class="col-md-5">
@@ -65,22 +65,15 @@
           <td><%= link_to 'Show', project_product_path(specification.product.brand_id, specification.product) %>
             <% if can? :destroy, Specification %>
               <%= link_to 'Eliminar', project_product_specification_path(@project.id, specification.product.id, :id => specification.id), method: :delete, data: { confirm: '¿Seguro quiere eliminar la especificación?' } %></td>
-            <% end %>
+          <% end %>
         </tr>
       <% end %>
     </div>
-    <div class="col-md-7 float-right">
-      <%= text_area_tag :content, (render partial: "specification") , :class => "tinymce", :rows => 40, :cols => 120 %>
-      <%= tinymce %>
-    </div>
+    <% if can? :create, Specification %>
+      <div class="col-md-7 float-right">
+        <%= text_area_tag :content, (render partial: "specification") , :class => "tinymce", :rows => 40, :cols => 120 %>
+        <%= tinymce %>
+      </div>
+    <% end %>
   </div>
 </div>
-
-
-
-
-
-
-
-
-</body>
