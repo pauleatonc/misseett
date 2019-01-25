@@ -4,7 +4,8 @@
       Puertas de Madera
     </h2>
     <% @project.specifications.each do |specification| %>
-      <% if specification.product.product_type.id == 1 %>
+      <% if specification.product.product_type == ProductType.first %>
+
         <ol>
           <li>
             <h3><%= specification.product.title %></h3>
@@ -21,7 +22,7 @@
       Puertas Quincalleria
     </h2>
     <% @project.specifications.each do |specification| %>
-      <% if specification.product.product_type.id == 2 %>
+      <% if specification.product.product_type == ProductType.second %>
         <ol>
           <li>
             <h3><%= specification.product.title %></h3>
@@ -38,7 +39,7 @@
       Puertas Metálicas
     </h2>
     <% @project.specifications.each do |specification| %>
-      <% if specification.product.product_type.id == 3 %>
+      <% if specification.product.product_type == ProductType.third %>
         <ol>
           <li>
             <h3><%= specification.product.title %></h3>
