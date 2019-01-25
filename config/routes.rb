@@ -21,8 +21,20 @@ Rails.application.routes.draw do
   get 'user/show'
   get 'specifications/show'
   resources :products, only: %i[new create index]
-  resources :events
+  resources :brand_plans
+  resources :orders, only: %i[show create destroy index] do
+    member do
+      post 'order_status', to: 'orders#order_status'
+    end
+  end
+  # resources :events -------->   Por el momento no estoy ocupando events.
   resources :users, only: :show
   resources :states, only: :index
   resources :cities, only: :index
+  resources :billings, only: :index do
+    collection do
+      get 'pre_pay'
+      get 'execute'
+    end
+  end
 end

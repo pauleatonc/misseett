@@ -1,0 +1,48 @@
+<div class="container">
+  <% if current_user.orders.payedtrue.exists? %>
+  <h1>Tu plan es:</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre plan</th>
+          <th>Descripcion</th>
+          <th>Cancelar Cuenta</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% current_user.orders.payedtrue.each do |order| %>
+          <tr>
+            <td><%= order.brand_plan.name %></td>
+            <td><%= order.brand_plan.description %></td>
+            <td><%= link_to 'Cancelar', order_status_order_path(order.id), class: 'btn btn-success' , method: :post, data: { confirm: '¿Seguro quiere cancelar la Suscripciónr?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h1>Selecciona tu Plan de Suscripción</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre plan</th>
+            <th>Descripcion</th>
+            <th>precio</th>
+            <th>comprar</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @brand_plans.each do |plan| %>
+            <tr>
+              <td><%= plan.name %></td>
+              <td><%= plan.description %></td>
+              <td><%= plan.price %> USD </td>
+              <td><%= link_to 'Suscribir', orders_path(brand_plan_id: plan.id), class: 'btn btn-success' , method: :post %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  <% end %>
+
+</div>

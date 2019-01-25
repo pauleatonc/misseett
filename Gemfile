@@ -6,6 +6,10 @@ ruby '2.4.1'
 gem 'rails', '~> 5.2.1'
 # Rails ERD para generar diagrama
 gem 'rails-erd', require: false, group: :development
+#Getting DB models
+group :development, :test do
+    gem 'railroady'
+end
 #faker
 gem 'faker'
 # Paypal

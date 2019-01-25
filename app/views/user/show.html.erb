@@ -5,16 +5,18 @@
   </div>
   <div class="">
     <% if can? :create, Brand %>
-      <div class="jumbotron">
-        <p> <%= @user_brand.logo %> </p>
-        <p> <%= @user_brand.name %> </p>
-        <p> <%= @user_brand.description %> </p>
-        <p> <%= @user_brand.contact %> </p>
-        <p> <%= @user_brand.email %> </p>
-        <p> <%= @user_brand.phone %> </p>
-        <p> <%= @user_brand.address %> </p>
-        <p> <%= @user_brand.city.name %> </p>
-      </div>
+      <% if @user.brand_id.present? %>
+        <div class="jumbotron">
+          <p> <%= @user_brand.logo %> </p>
+          <p> <%= @user_brand.name %> </p>
+          <p> <%= @user_brand.description %> </p>
+          <p> <%= @user_brand.contact %> </p>
+          <p> <%= @user_brand.email %> </p>
+          <p> <%= @user_brand.phone %> </p>
+          <p> <%= @user_brand.address %> </p>
+          <p> <%= @user_brand.city.name %> </p>
+        </div>
+      <% end %>
     <% end %>
   </div>
 

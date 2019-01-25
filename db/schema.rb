@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_17_173417) do
+ActiveRecord::Schema.define(version: 2019_01_24_224331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,25 @@ ActiveRecord::Schema.define(version: 2019_01_17_173417) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "billings", force: :cascade do |t|
+    t.string "code"
+    t.string "payment_method"
+    t.decimal "amount", precision: 10, scale: 2
+    t.string "currency"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_billings_on_user_id"
+  end
+
+  create_table "brand_plans", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "brands", force: :cascade do |t|
@@ -88,6 +107,20 @@ ActiveRecord::Schema.define(version: 2019_01_17_173417) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.boolean "payed", default: false
+    t.bigint "user_id"
+    t.bigint "brand_plan_id"
+    t.integer "quantity", default: 1
+    t.integer "price"
+    t.bigint "billing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billing_id"], name: "index_orders_on_billing_id"
+    t.index ["brand_plan_id"], name: "index_orders_on_brand_plan_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "product_types", force: :cascade do |t|
@@ -198,9 +231,13 @@ ActiveRecord::Schema.define(version: 2019_01_17_173417) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "billings", "users"
   add_foreign_key "brands", "cities"
   add_foreign_key "brands", "users"
   add_foreign_key "events", "projects"
+  add_foreign_key "orders", "billings"
+  add_foreign_key "orders", "brand_plans"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "product_types"
   add_foreign_key "products", "project_traffics"

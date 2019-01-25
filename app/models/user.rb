@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :projects
   has_many :products, through: :projects
   has_many :brands
+  has_many :orders
+  has_many :billings
   belongs_to :city, optional: true
   belongs_to :gender, optional: true
   # Include default devise modules. Others available are:
