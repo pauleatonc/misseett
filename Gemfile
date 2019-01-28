@@ -12,6 +12,8 @@ group :development, :test do
 end
 #faker
 gem 'faker'
+#Caracal to generate docx files
+gem 'caracal-rails'
 # Paypal
 gem 'paypal-sdk-rest'
 # To manage image sizes
