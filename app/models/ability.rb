@@ -26,7 +26,7 @@ class Ability
     elsif user.has_role? :regular_user
       # Regular user can over project model
       can :create, Project
-      can [:read, :edit, :update, :delete, :destroy, :status_opened, :status_closed], Project do |project|
+      can [:read, :edit, :update, :delete, :destroy, :status_opened, :status_closed, :getdocument], Project do |project|
         project.user == user
       end
       # Regular user can over event model

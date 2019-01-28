@@ -14,6 +14,14 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def getdocument
+    @project = Project.find(params[:id])
+    @document = 'Especificaciones Técnicas de arquitectura'
+    respond_to do |format|
+      format.docx { headers['Content-Disposition'] = "attachment; filename=\"#{@project.name}.docx\"" }
+    end
+  end
+
   # GET /projects/new
   def new
     @project = Project.new

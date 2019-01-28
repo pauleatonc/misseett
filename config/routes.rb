@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :brands do
     resources :products, only: %i[destroy edit show]
   end
-
+  get 'projects/getdocument', format: 'docx'
   resources :projects do
     member do
       post 'status_opened', to: 'projects#status_opened'
