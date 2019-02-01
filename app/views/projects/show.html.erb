@@ -41,11 +41,11 @@
     </div>
     <div class="d-flex justify-content-between paddingtop">
       <% if can? :create, Specification %>
-        <a href="<%= project_products_path(@project) %>" class="button bg-dark text-white button-dark button-large noleftmargin" role="button">Especificar</a>
+        <a href="<%= project_products_path(@project) %>" class="button  text-white  noleftmargin" role="button">Especificar</a>
         <% end %>
       <% if can? :edit, Project %>
-        <a href="<%= edit_project_path(@project) %>" class="button bg-dark text-white button-dark button-large noleftmargin" role="button">Editar Informacion</a>
-        <a href="<%= projects_path %>" class="button bg-dark text-white button-dark button-large noleftmargin" role="button">Volver</a>
+        <a href="<%= edit_project_path(@project) %>" class="button bg-dark text-white button-dark  noleftmargin" role="button">Editar Informacion</a>
+        <a href="<%= projects_path %>" class="button bg-dark text-white button-dark noleftmargin" role="button">Volver</a>
       <% end %>
     </div>
   </div>
@@ -74,5 +74,5 @@
       </div>
     <% end %>
   </div>
-  <%= link_to 'Generate a Caracal document', projects_getdocument_path(:id => @project.id), target: :new %>
+  <%= link_to 'Generate a Caracal document', projects_getdocument_path(:id => @project.id), target: :new, class:"button  text-white  button-large noleftmargin"%>
 </div>

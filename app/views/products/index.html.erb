@@ -44,8 +44,10 @@
                     <a href="<%= projects_path %>" class="add-to-cart">
                       <i class="icon-shopping-cart"></i><span>Especificar</span></a>
                   <% else %>
-                    <a href="<%= project_product_specifications_path(params[:project_id], product) %>" class="add-to-cart">
-                      <i class="icon-shopping-cart"></i><span>Especificar</span></a>
+                  <%= link_to project_product_specifications_path(params[:project_id], product), method: :post do %>
+                    <i class="icon-shopping-cart"></i>
+                    <span>Especificar</span>
+                    <% end %>
                   <% end %>
                 </div>
               </div>
