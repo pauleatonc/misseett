@@ -1,65 +1,136 @@
-<div class="container">
-  <p id="notice"><%= notice %></p>
-
-  <h1>Projects</h1>
+<section id="page-title">
+  <div class="container clearfix center">
+    <h1>Administra tus Proyectos</h1>
+    <span>¿En que estás trabajando?</span>
     <% if can? :create, Project %>
-      <div class="btn btn-info">
-        <%= link_to 'New Project', new_project_path %>
-      </div>
+      <a class="button bg-dark text-white button-dark button-large noleftmargin" href="<%= new_project_path %>" role="button">Nuevo Proyecto</a>
     <% end %>
-  <table id="myTable" class="table">
-    <thead>
-      <tr>
-        <th>Usuario</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Oficina</th>
-        <<th>Fecha Inicio</th>
-        <th>Tipo de Proyecto</th>
-        <th>Trafico de Proyecto</th>
-        <th>Ciudad</th>
-          <% if can? :create, Project %>
-            <th>Status</th>
-          <% end %>
-        <th>Opciones</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @projects.each do |project| %>
+  </div>
+</section>
+<div class="content-wrap">
+  <div class="container clearfix">
+    <table id="myTable" class="table">
+      <thead>
         <tr>
-          <% if can? :read, project %>
-          <td><%= project.user.firstname + " " + project.user.lastname%></td>
-          <td><%= project.name %></td>
-          <td><%= project.description %></td>
-          <td><%= project.office %></td>
-          <<td><%= project.created_at %></td>
-          <td><%= project.project_type.category %></td>
-          <td><%= project.project_traffic.category %></td>
-          <td><%= project.city.name %></td>
-
-            <% if can? :create, project %>
-              <% if project.status_open == true %>
-          <td><%= link_to 'Abierto', status_closed_project_path(project), class: 'btn btn-info', method: :post, data: { confirm: "¿Seguro quiere cerrar el proyecto #{project.name}?" } %></td>
-                <% else %>
-          <td><%= link_to 'Cerrado', status_opened_project_path(project), class: 'btn btn-danger', method: :post, data: { confirm: "¿Seguro quiere reabrir el proyecto #{project.name}?" } %></td>
-                <% end %>
-              <% end %>
-
-          <td><% if project.status_open == true %>
-              <%= link_to 'Especificaciones', project %>
-              <% end %>
-
-              <% if can? :edit, project %>
-                <%= link_to 'Editar', edit_project_path(project) %>
-              <% end %>
-
-              <% if can? :destroy, project %>
-                <%= link_to 'Eliminar', project, method: :delete, data: { confirm: '¿Seguro quiere eliminar el proyecto?' } %></td>
-              <% end %>
-            <% end %>
+            <th></th>
         </tr>
+      </thead>
+      <tbody>
+        <% if current_user.has_role? :regular_user %>
+          <% current_user.projects.each do |project| %>
+            <tr>
+              <th>
+                <div id="posts" class="events small-thumbs">
+                  <div class="entry clearfix">
+                    <div class="entry-image center">
+                        <i class="fas fa-building fa-9x color iconpadding"></i>
+                        <div class="datesize color"><%= project.created_at.strftime("%Y-%m-%d") %></div>
+                    </div>
+                    <div class="entry-c">
+                      <div class="entry-title">
+                        <h2><%= project.name %></h2>
+                      </div>
+                      <ul class="entry-meta clearfix">
+                        <li>
+                          <span class="badge badge-warning"><%= project.project_type.category %></span></li>
+                        <li>
+                          <i class="icon-time"></i><%= project.project_traffic.category %></li>
+                        <li>
+                          <i class="icon-map-marker2"></i>
+                          Ciudad:
+                          <%= project.city.name %></li>
+                        <li>
+                          <i class="icon-map-marker2"></i>
+                          Oficina:
+                          <%= project.office %></li>
+                        <li>
+                          <i class="icon-map-marker2"></i>
+                          Arquiecto:
+                          <%= project.user.firstname + " " + project.user.lastname%></li>
+                      </ul>
+                      <div class="entry-content">
+                        <p><%= project.description %></p>
+                        <div class="float-right">
+
+                          <% if can? :create, project %>
+                            <% if project.status_open == true %>
+                              <%= link_to 'Abierto', status_closed_project_path(project), class: 'btn btn-info', method: :post, data: { confirm: "¿Seguro quiere cerrar el proyecto #{project.name}?" } %>
+                            <% else %>
+                              <%= link_to 'Cerrado', status_opened_project_path(project), class: 'btn btn-danger', method: :post, data: { confirm: "¿Seguro quiere reabrir el proyecto #{project.name}?" } %>
+                            <% end %>
+                          <% end %>
+
+                          <% if project.status_open == true %>
+                            <%= link_to 'Especificaciones', project , class: 'btn btn-success'%>
+                          <% end %>
+
+                          <% if can? :edit, project %>
+                            <%= link_to 'Editar', edit_project_path(project), class: 'btn btn-warning' %>
+                          <% end %>
+
+                          <% if can? :destroy, project %>
+                            <%= link_to 'Eliminar', project, class: 'btn btn-light', method: :delete, data: { confirm: '¿Seguro quiere eliminar el proyecto?' } %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          <% end %>
+        <% end %>
+
+        <% if current_user.has_role? :brand_manager %>
+          <% current_user.brands.each do |brand| %>
+            <% brand.products.each do |product| %>
+              <% product.projects.each do |project| %>
+              <tr>
+                <th>
+                  <div id="posts" class="events small-thumbs">
+                    <div class="entry clearfix">
+                      <div class="entry-image center">
+                          <i class="fas fa-building fa-9x color iconpadding"></i>
+                          <div class="datesize color"><%= project.created_at.strftime("%Y-%m-%d") %></div>
+                      </div>
+                      <div class="entry-c">
+                        <div class="entry-title">
+                          <h2><%= project.name %></h2>
+                        </div>
+                        <ul class="entry-meta clearfix">
+                          <li>
+                            <span class="badge badge-warning"><%= project.project_type.category %></span></li>
+                          <li>
+                            <i class="icon-time"></i><%= project.project_traffic.category %></li>
+                          <li>
+                            <i class="icon-map-marker2"></i>
+                            Ciudad:
+                            <%= project.city.name %></li>
+                          <li>
+                            <i class="icon-map-marker2"></i>
+                            Oficina:
+                            <%= project.office %></li>
+                          <li>
+                            <i class="icon-map-marker2"></i>
+                            Arquiecto:
+                            <%= project.user.firstname + " " + project.user.lastname%></li>
+                        </ul>
+                        <div class="entry-content">
+                          <p><%= project.description %></p>
+                          <div class="float-right">
+                              <%= link_to 'Especificaciones', project , class: 'btn btn-success'%>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
       <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>

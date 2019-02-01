@@ -7,16 +7,179 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  
+    <!-- Stylesheets ============================================= -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700,900|Playfair+Display:400,700" rel="stylesheet" type="text/css"/>
+    <%= stylesheet_link_tag "canvas_style" %>
+    <%= stylesheet_link_tag "canvas_dark" %>
+    <%= stylesheet_link_tag "canvas_resume" %>
+    <%= stylesheet_link_tag "canvas_animate" %>
+    <%= stylesheet_link_tag "canvas_responsive" %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
   </head>
 
-  <body>
+    <body class="stretched sticky-responsive-menu">
     <%= render 'layouts/navbar' %>
-    <%= render 'layouts/alerts' %>
+    <div class="paddingtop blackcolor">
+    </div>
+
+
 
     <%= yield %>
+
+    <!-- Footer ============================================= -->
+    <footer id="footer" class="page-section dark noborder nopadding clearfix" style="background-color: #1C1C1C;">
+
+      <div class="container clearfix">
+
+        <!-- Contadores ============================================= -->
+        <div class="col-lg-12">
+
+          <div class="widget clearfix" style="margin-bottom: -20px;">
+
+            <div class="row">
+
+              <div class="col-lg-2 col-md-2 col-sm-6 bottommargin-sm text-center">
+                <div class="counter counter-small">
+                  <span data-from="1" data-to="<%= User.all.count %>" data-refresh-interval="80" data-speed="3000" data-comma="true"></span></div>
+                <h5 class="nobottommargin">Usuarios</h5>
+              </div>
+
+              <div class="col-lg-2 col-md-2 col-sm-6 bottommargin-sm text-center">
+                <div class="counter counter-small">
+                  <span data-from="1" data-to="<%= Brand.all.count %>" data-refresh-interval="50" data-speed="2000" data-comma="true"></span></div>
+                <h5 class="nobottommargin">Proveedores</h5>
+              </div>
+
+              <div class="col-lg-2 col-md-2 col-sm-6 bottommargin-sm text-center">
+                <div class="counter counter-small">
+                  <span data-from="1" data-to="<%= Product.all.count %>" data-refresh-interval="50" data-speed="2000" data-comma="true"></span></div>
+                <h5 class="nobottommargin">Productos</h5>
+              </div>
+
+              <div class="col-lg-2 col-md-2 col-sm-6 bottommargin-sm text-center">
+                <div class="counter counter-small">
+                  <span data-from="1" data-to="<%= Project.all.count %>" data-refresh-interval="50" data-speed="2000" data-comma="true"></span></div>
+                <h5 class="nobottommargin">Proyectos Especificados</h5>
+              </div>
+
+              <div class="col-lg-2 col-md-2 col-sm-6 bottommargin-sm text-center">
+                <div class="counter counter-small">
+                  <span data-from="1" data-to="<%= Specification.all.count %>" data-refresh-interval="50" data-speed="2000" data-comma="true"></span></div>
+                <h5 class="nobottommargin">Productos Especificados</h5>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- ============================================ -->
+
+        <!-- Footer Widgets ============================================= -->
+        <div class="footer-widgets-wrap clearfix" style="padding: 80px 0">
+          <div class="col_one_fourth">
+            <div class="footer-logo">
+              <span class="t400 color ls1" style="font-size: 22px; ">Mis EETT.</span><br>
+              <small class="ls3 uppercase" style="color: rgba(255,255,255,0.2);">&copy; 2019 Reserved.</small>
+            </div>
+          </div>
+          <div class="col_three_fourth col_last">
+            <div class="col_one_third">
+              <div class="widget widget_links clearfix">
+                <h4>Contáctanos</h4>
+                <div class="footer-content">
+                  <abbr title="Phone Number">
+                    <strong>Teléfono:</strong>
+                  </abbr>
+                  +56 9 94797439<br>
+                  <abbr title="Email Address">
+                    <strong>Email:</strong>
+                  </abbr>
+                  contacto@miseett.com
+                </div>
+              </div>
+            </div>
+            <div class="col_one_third">
+              <div class="widget clearfix">
+                <h4>Ubicación</h4>
+                <div class="footer-content">
+                  <address>
+                    <strong>Dirección:</strong><br>
+                    José Domingo Cañas #460<br>
+                    Ñuñoa, Santiago<br>
+                  </address>
+                </div>
+              </div>
+            </div>
+            <div class="col_one_third col_last">
+              <div class="widget widget_links clearfix">
+                <h4>Social</h4>
+                <a href="#" class="social-icon nobg si-small si-light si-facebook">
+                  <i class="icon-facebook"></i>
+                  <i class="icon-facebook"></i>
+                </a>
+                <a href="#" class="social-icon nobg si-small si-light si-twitter">
+                  <i class="icon-linkedin"></i>
+                  <i class="icon-linkedin"></i>
+                </a>
+                <a href="#" class="social-icon nobg si-small si-light si-gplus">
+                  <i class="icon-gplus"></i>
+                  <i class="icon-gplus"></i>
+                </a>
+                <a href="#" class="social-icon nobg si-small si-light si-instagram">
+                  <i class="icon-instagram"></i>
+                  <i class="icon-instagram"></i>
+                </a>
+                <a href="#" class="social-icon nobg si-small si-light si-dribbble">
+                  <i class="icon-youtube"></i>
+                  <i class="icon-youtube"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyrights ============================================= -->
+      <div id="copyrights" style="background-color: #111;">
+
+        <div class="container clearfix">
+
+          <div class="col_full center nobottommargin">
+            Copyrights &copy; 2019 All Rights Reserved by Simbionte SpA.<br>
+            <div class="copyright-links">
+              <a href="http://www.simbionte.cl">www.simbionte.cl</a>
+              /
+              <a href="#">Politica de Privacidad</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- #copyrights end -->
+    </footer>
+    <!-- #footer end -->
+    <!-- Go To Top
+  	============================================= -->
+  	<div id="gotoTop" class="icon-angle-up"></div>
+    <script>
+      jQuery(window).scroll(function () {
+        var pixs = jQuery(window).scrollTop(),
+          opacity = pixs / 650,
+          element = jQuery('.blurred-img'),
+          elementHeight = element.outerHeight(),
+          elementNextHeight = jQuery('.content-wrap').find('.page-section').first().outerHeight();
+        if ((elementHeight + elementNextHeight + 50) > pixs) {
+          element.addClass('blurred-image-visible');
+          element.css({'opacity': opacity});
+        } else {
+          element.removeClass('blurred-image-visible');
+        }
+      });
+    </script>
   </body>
 </html>

@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @orders = current_user.orders.notpayed
     @total = @orders.get_total
@@ -9,7 +11,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @Order = Order.new
+    @order = Order.new
   end
 
   def create

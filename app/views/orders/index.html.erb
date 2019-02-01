@@ -1,32 +1,39 @@
-<div class="container">
-  <h1>Confirmar Suscripción</h1>
+<section id="page-title">
+  <div class="container clearfix">
+    <h1>Tus compras y suscripciones</h1>
+    <span>Aumenta la presencia de tu marca y vuelvete un protagonista.</span>
+  </div>
+</section>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th> Tipo de Suscripción </th>
-        <th> Descripción </th>
-        <th> Valor </th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
+<div class="content-wrap">
+  <div class="container clearfix">
+    <table class="table">
+      <thead>
         <tr>
-          <td> <%= order.brand_plan.name %> </td>
-          <td> <%= order.brand_plan.description %> </td>
-          <td> <%= order.price %> USD </td>
-          <td> <%= link_to 'Eliminar', order, method: :delete, data: { confirm: '¿Seguro quiere eliminar?' } %> </td>
+          <th> Tipo de Suscripción </th>
+          <th> Descripción </th>
+          <th> Valor </th>
+          <th></th>
         </tr>
-      <% end %>
-      <tr class="table-dark">
-        <td></td>
-        <td> Total Compra </td>
-        <td> <%= @total %> USD </td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <%= link_to 'Confirmar Compra', pre_pay_billings_path, class: 'btn btn-success float-right' %>
-
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td> <%= order.brand_plan.name %> </td>
+            <td> <%= order.brand_plan.description %> </td>
+            <td> <%= order.price %> USD </td>
+            <td> <%= link_to 'Eliminar', order, method: :delete, data: { confirm: '¿Seguro quiere eliminar?' } %> </td>
+          </tr>
+        <% end %>
+        <tr class="table-dark">
+          <td></td>
+          <td> Total Compra </td>
+          <td> <%= @total %> USD </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <%= link_to 'Confirmar Compra con Paypal', pre_pay_billings_path, class: 'btn btn-danger btn-block btn-lg bgcolor border-color float-right' %>
+  </div>
+  </div>
 </div>

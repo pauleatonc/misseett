@@ -1,56 +1,85 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<!-- Header ============================================= -->
+<header id="header" class="transparent-header sticky-transparent static-sticky position-fixed position-fixed col-md-12">
+  <div id="header-wrap" class=" ">
+    <div class="container clearfix">
+      <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+      <!-- Logo ============================================= -->
+      <!-- #logo end -->
+      <!-- Primary Navigation ============================================= -->
+      <nav id="primary-menu" class="">
+        <div class="container">
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="<%= root_path %>">Inicio
-          <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= projects_path %>">Mis EETT</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= products_path %>">
-          Productos
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= brands_path %>">
-          Proveedores
-        </a>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= brand_plans_path %>">
-          Plan Empresa
-        </a>
-      </li>
-    </ul>
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <% if user_signed_in? %>
-          <% if current_user.avatar.attached? %>
-            <%= image_tag current_user.avatar.variant(resize: "60x60"), class: 'rounded-circle' %>
-            <%= current_user.email %>
-          <% else %>
-            <%= image_tag("avaregeavatar.png", size: "60x60") %>
-            <%= current_user.email %>
-          <% end %>
-        <% else %>
-          Ingreso
-        <% end %>
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <% if user_signed_in? %>
-          <a class="dropdown-item" href="<%= user_show_path %>">Perfil</a>
-          <a class="dropdown-item" href="<%= orders_path %>"> Compras </a>
-          <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="DELETE">Cerrar Sesión</a>
-        <% else %>
-          <a class="dropdown-item" href="<%= new_user_session_path %>">Iniciar Sesión</a>
-          <a class="dropdown-item" href="<%= new_user_registration_path %>">Registrarse</a>
-        <% end %>
+          <ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="0">
+            <li class="current">
+              <a href="<%= root_path %>">
+                <i class="fas fa-home"></i>
+                <div>Portada</div>
+              </a>
+            </li>
+            <li>
+              <a href="<%= projects_path %>">
+                <i class="fas fa-file-signature"></i>
+                <div>Especificar</div>
+              </a>
+            </li>
+            <li>
+              <a href="<%= products_path %>">
+                <i class="fas fa-puzzle-piece"></i>
+                <div>Productos</div>
+              </a>
+            </li>
+            <li>
+              <a href="<%= brands_path %>">
+                <i class="fas fa-globe"></i>
+                <div>Proveedores</div>
+              </a>
+            </li>
+            <li>
+              <a href="<%= brand_plans_path %>">
+                <i class="fas fa-hands-helping"></i>
+                <div>Planes</div>
+              </a>
+            </li>
+            <li>
+              <a href="#" data-href="#footer">
+                <i class="fas fa-envelope"></i>
+                <div>Contact</div>
+              </a>
+            </li>
+            <% if user_signed_in? %>
+              <li>
+                <a href="<%= user_show_path %>">
+                  <i class="fas fa-user-check"></i>
+                  <div><%= current_user.email %></div>
+                </a>
+              </li>
+
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                    <i class="fas fa-sign-out-alt"></i>
+                    <div>Salir</div>
+
+                  <% end %>
+                </li>
+              <% else %>
+                <li>
+                  <a href="<%= new_user_session_path %>">
+                    <i class="fas fa-user"></i>
+                    <div>Ingresar</div>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= new_user_registration_path %>">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <div>Registrarse</div>
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+
+        </nav>
+        <!-- #primary-menu end -->
       </div>
     </div>
-  </div>
-</nav>
+</header><!-- #header end -->

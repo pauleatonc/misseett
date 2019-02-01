@@ -1,57 +1,55 @@
-<div class="container">
-  <div class="jumbotron">
-    <div class="col-md-4">
-      <p id="notice"><%= notice %></p>
-      <p>
-        <strong>User:</strong>
-        <%= @project.user.firstname + " " + @project.user.lastname %>
-      </p>
-      <p>
-        <strong>Fecha:</strong>
-        <%= @project.created_at %>
-      </p>
-      <p>
-        <strong>Name:</strong>
-        <%= @project.name %>
-      </p>
-      <p>
-        <strong>Description:</strong>
-        <%= @project.description %>
-      </p>
-      <p>
-        <strong>Office:</strong>
-        <%= @project.office %>
-      </p>
-      <p>
-        <strong>Project type:</strong>
-        <%= @project.project_type.category %>
-      </p>
-      <p>
-        <strong>Project traffic:</strong>
-        <%= @project.project_traffic.category %>
-      </p>
-      <p>
-        <strong>City:</strong>
-        <%= @project.city.name %>
-      </p>
-      <p>
-        <strong>Contacto:</strong>
-        <%= @project.user.email %>
-      </p>
-      <% if can? :edit, Project %>
-        <%= link_to 'Editar informacion', edit_project_path(@project), class: "btn btn-secondary"%>
-
-      <% end %>
-      <%= link_to 'Volver', projects_path, class: "btn btn-secondary" %>
-    </div>
-    <% if can? :create, Specification %>
-      <div class="col-md-4">
-        <h3><%= link_to 'Especificar', project_products_path(@project), class: "btn btn-info" %></h3>
+<section id="page-title">
+  <div class="font-primary container clearfix">
+      <i class="fas fa-building fa-9x color  col-md-4 center"></i>
+      <div class="col-md-8 float-right">
+        <span>Proyecto: </span><h1 class=font-secondary> <%= @project.name %></h1>
+        <span><%= @project.description %></span>
       </div>
-    <% end %>
 
   </div>
-</div>
+</section>
+<div class="container clearfix">
+    <div class="clearfix d-flex justify-content-between font-primary">
+      <span>
+        <strong>User:</strong>
+        <%= @project.user.firstname + " " + @project.user.lastname %>
+      </span>
+      <span>
+        <strong>Fecha:</strong>
+        <%= @project.created_at %>
+      </span>
+      <span>
+        <strong>Office:</strong>
+        <%= @project.office %>
+      </span>
+      <span>
+        <strong>Project type:</strong>
+        <%= @project.project_type.category %>
+      </span>
+      <span>
+        <strong>Project traffic:</strong>
+        <%= @project.project_traffic.category %>
+      </span>
+      <span>
+        <strong>City:</strong>
+        <%= @project.city.name %>
+      </span>
+      <span>
+        <strong>Contacto:</strong>
+        <%= @project.user.email %>
+      </span>
+    </div>
+    <div class="d-flex justify-content-between paddingtop">
+      <% if can? :create, Specification %>
+        <a href="<%= project_products_path(@project) %>" class="button bg-dark text-white button-dark button-large noleftmargin" role="button">Especificar</a>
+        <% end %>
+      <% if can? :edit, Project %>
+        <a href="<%= edit_project_path(@project) %>" class="button bg-dark text-white button-dark button-large noleftmargin" role="button">Editar Informacion</a>
+        <a href="<%= projects_path %>" class="button bg-dark text-white button-dark button-large noleftmargin" role="button">Volver</a>
+      <% end %>
+    </div>
+  </div>
+
 <div class="container ">
   <div class="row">
     <div class="col-md-5">

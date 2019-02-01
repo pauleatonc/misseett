@@ -28,7 +28,6 @@ Rails.application.routes.draw do
     end
   end
   # resources :events -------->   Por el momento no estoy ocupando events.
-  resources :users, only: :show
   resources :states, only: :index
   resources :cities, only: :index
   resources :billings, only: :index do

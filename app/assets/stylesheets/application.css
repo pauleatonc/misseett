@@ -13,7 +13,8 @@
  *= require bootstrap/dist/css/bootstrap
  *= require datatables.net-bs4/css/dataTables.bootstrap4
  *= require fullcalendar/dist/fullcalendar
- //= require bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.min
+ *= require bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.min
+ *= require font-awesome/css/font-awesome
  *= require_tree .
  *= require_self
  */

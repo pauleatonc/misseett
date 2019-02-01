@@ -7,6 +7,15 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 # Add Yarn node_modules folder to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
+Rails.application.config.assets.precompile += %w[canvas_style.css]
+Rails.application.config.assets.precompile += %w[canvas_dark.css]
+Rails.application.config.assets.precompile += %w[canvas_resume.css]
+Rails.application.config.assets.precompile += %w[canvas_animate.css]
+Rails.application.config.assets.precompile += %w[canvas_magnific-popup.css]
+Rails.application.config.assets.precompile += %w[canvas_responsive.css]
+Rails.application.config.assets.precompile += %w[canvas_fonts.css]
+Rails.application.config.assets.precompile += %w[canvas_font-icons.css]
+Rails.application.config.assets.precompile += %w[canvas_colors.css]
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
