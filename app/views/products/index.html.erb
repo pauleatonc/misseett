@@ -1,91 +1,69 @@
-<body>
-<div class="container">
+<section id="page-title" class="paddingbottom">
+  <div class="container clearfix center">
+    <h1>Productos</h1>
+    <span>¿Que necesitas para tu proyecto?</span>
+    <span class="color">Comienza a especificar</span>
+  </div>
+</section>
 
-    <p id="notice"><%= notice %></p>
+<% if params[:project_id].nil? %>
+<% else %>
+  <div class="clearfix container center">
+    <a class="button bg-dark text-white button-dark button-large noleftmargin" href="<%= project_path(params[:project_id]) %>" role="button">Volver a Proyecto</a>
+  </div>
+<% end %>
 
-    <h1>Products</h1>
-    <h1 class="center">Titulo</h1>
+<!-- Shop ============================================= -->
 
-    <table id="myTable" class="table">
-      <thead>
-        <tr>
-          <th>Imagen</th>
-          <th>descripcion</th>
-          <th>opciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <div class="">
-          <div class="field">
-            <%= f.label :project_id %>
-            <%= collection_select(:specification, :project_id, Project.all, :id, :name, prompt: true) %>
-          </div>
-        </div>
-          <!-- <div class="row" > -->
-            <% @products.each do |product| %>
-            <!-- <div class="col-md-4 col-sm-1">
-              <div class="body"> -->
-              <tr>
-                <td>
-                  <% if product.images.attached? %>
-                    <%= image_tag product.images.first.variant(resize: "200x200") %></td>
+<div class="content-wrap">
+  <div class="container clearfix">
+    <div id="shop" class="shop grid-container clearfix " data-layout="fitRows">
+      <% @products.each do |product| %>
+
+          <div class="product clearfix ">
+            <% if product.images.attached? %>
+              <div class="product-image"> <%= image_tag product.images.first.variant(resize: "200x200") %><div class="product-overlay">
+                  <a href="<%= brand_product_path(product.brand_id, :id => product.id)%>" class="item-quick-view" data-lightbox="ajax">
+                    <i class="icon-zoom-in2"></i><span>Mostrar</span></a>
+                  <% if params[:project_id].nil? %>
+                    <a href="<%= projects_path %>" class="add-to-cart">
+                      <i class="icon-shopping-cart"></i><span>Especificar</span></a>
                   <% else %>
-                    <%= image_tag("seeds.png", size: "200x200") %></td>
+                    <a href="<%= projects_path %>" class="add-to-cart">
+                      <i class="icon-shopping-cart"></i><span>Especificar</span></a>
                   <% end %>
-                <td>
-                  <h3> <%= product.title %> </h3>
-                  <p> <%= product.description %> </p>
-                  <h6> <%= product.project_traffic.category %></h6>
-                  <h6> <%= product.project_type.category %></h6>
-                  <h6> Marca: <%= product.company.name %></h6>
-                </td>
-                <td>
-                  <%= link_to 'Show', product %>
-                  <%= link_to 'Edit', edit_product_path(product) %>
-                  <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-                  <%= link_to 'Agregar', product_specifications_path(product), class: 'btn btn-success', method: :post%>
-                </td>
-              </tr>
-              <!-- </div>
-            </div> -->
+                </div>
+              </div>
+            <% else %>
+              <div class="product-image producthigh">
+                <%= image_tag("seeds.png", size: "200x200") %>
+                <div class="product-overlay">
+                  <a href="<%= brand_product_path(product.brand_id, :id => product.id)%>" class="item-quick-view" data-lightbox="ajax">
+                    <i class="icon-zoom-in2"></i><span>Mostrar</span></a>
+                  <% if params[:project_id].nil? %>
+                    <a href="<%= projects_path %>" class="add-to-cart">
+                      <i class="icon-shopping-cart"></i><span>Especificar</span></a>
+                  <% else %>
+                  <%= link_to project_product_specifications_path(params[:project_id], product), method: :post do %>
+                    <i class="icon-shopping-cart"></i>
+                    <span>Especificar</span>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
             <% end %>
-          <!-- </div> -->
+            <div class="product-desc producthigh">
+              <div class="product-title"><h3><%= product.title %></h3></div>
+              <div class="product-title"><p><%= product.description %></p></div>
+            </div>
+            <div class="d-flex justify-content-around alignbottom producthigh">
+              <div class="product-title"><span><%= product.brand.name %></span></div>
+              <div class="product-title color"><span><%= product.project_traffic.category %></span></div>
+              <div class="product-title purple"><span><%= product.project_type.category %></span></div>
+            </div>
 
-      </tbody>
-    </table>
-    <br>
-    <%= link_to 'New Product', new_product_path %>
-</div>
-  <script>
-  $(document).ready( function () {
-      $('#myTable').DataTable();
-  } );
-  </script>
-</body>
+          </div>
 
-
-<!-- BACKUP
-
-<div class="row" id="myTable">
-  <% @products.each do |product| %>
-  <tr class="col-md-4 col-sm-1">
-    <div class="body">
-      <p>
-        <% if product.images.attached? %>
-          <%= image_tag product.images.first.variant(resize: "200x200") %></p>
-        <% else %>
-          <%= image_tag("seeds.png", size: "200x200") %></p>
-        <% end %>
-      <h3><%= product.title %></h3>
-      <p><%= product.description %></p>
-      <h5><%= product.project_traffic.category %></h5>
-      <h5><%= product.project_type.category %></h5>
-      <h4><%= product.company.name %></h4>
-        <%= link_to 'Show', product %>
-        <%= link_to 'Edit', edit_product_path(product) %>
-        <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Agregar', product_specifications_path(product), class: 'btn btn-success', method: :post%>
+      <% end %>
     </div>
-  </tr>
-  <% end %>
-</div -->
+  </div>

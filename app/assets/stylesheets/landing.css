@@ -1,0 +1,16 @@
+body{
+  margin: 0px;
+}
+.divheight{
+  height: 700px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.landingtitle{
+  font-size: 400%;
+  font-weight: bold;
+  line-height: 90%;
+  text-transform: uppercase;
+  text-align: center;
+}

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payer: false
+  user: one
+  brand_plan: one
+  quantity: 1
+  price: 1
+
+two:
+  payer: false
+  user: two
+  brand_plan: two
+  quantity: 1
+  price: 1

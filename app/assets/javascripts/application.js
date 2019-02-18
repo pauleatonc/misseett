@@ -10,7 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//
+//
+//
+//= require tinymce
 //= require jquery
+//= require canvas_functions
+//= require canvas_plugins
 //= require bootstrap/dist/js/bootstrap
 //= require datatables.net/js/jquery.dataTables
 //= require datatables.net-bs4/js/dataTables.bootstrap4

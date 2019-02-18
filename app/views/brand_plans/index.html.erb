@@ -1,0 +1,76 @@
+<div class="clearfix ">
+
+  <div class="heading-block center pt-4 ">
+    <h2>Planes Empresa.</h2>
+    <span>¿Quieres publicar tus productos y aumentar tus de ventas?.</span>
+    <span>¡Transformate de Usuario a Empresa!</span>
+    <span>Al suscribirse ya no podrá crear o editar proyectos.</span>
+  </div>
+  <div class="d-flex justify-content-md-center ">
+    <% if current_user.orders.payedtrue.exists? %>
+      <% current_user.orders.payedtrue.each do |order| %>
+        <div class="col-lg-3">
+          <div class="heading-block center pt-4 ">
+            <h3>Plan Contratado.</h3>
+          </div>
+          <div class="pricing-box best-price">
+            <div class="pricing-title">
+              <h3><%= order.brand_plan.name %></h3>
+            </div>
+            <div class="pricing-price">
+              <span class="price-unit">USD</span><%= order.brand_plan.price %> <span class="price-tenure"></span>
+            </div>
+            <div class="pricing-features">
+              <ul>
+                <li><%= order.brand_plan.description %></li>
+                <li><i class="icon-code"></i> <%= order.brand_plan.products %> Productos</li>
+                <li><strong><%= order.brand_plan.brands %></strong> Marcas</li>
+                <li><strong><%= order.brand_plan.duration %> Meses</strong>de licencia</li>
+                <li><i class="icon-star3"></i>
+                <i class="icon-star3"></i>
+                <i class="icon-star3"></i>
+                <i class="icon-star3"></i>
+                <i class="icon-star3"></i></li>
+              </ul>
+            </div>
+            <div class="pricing-action">
+              <%= link_to 'Cancelar', order_status_order_path(order.id), class: 'btn btn-danger btn-block btn-lg bgcolor border-color' , method: :post, data: { confirm: '¿Seguro quiere cancelar la Suscripciónr?' } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+
+      <% @brand_plans.each do |plan| %>
+        <div class="col-lg-3">
+          <div class="pricing-box best-price">
+            <div class="pricing-title">
+              <h3><%= plan.name %></h3>
+            </div>
+            <div class="pricing-price">
+              <span class="price-unit">USD</span><%= plan.price %><span class="price-tenure"></span>
+            </div>
+            <div class="pricing-features">
+              <ul>
+                <li><%= plan.description %></li>
+                <li><i class="icon-code"></i> <%= plan.products %> Productos</li>
+                <li><strong><%= plan.brands %></strong> Marcas</li>
+                <li><strong><%= plan.duration %> Meses</strong>de licencia</li>
+                <li><i class="icon-star3"></i>
+                <i class="icon-star3"></i>
+                <i class="icon-star3"></i>
+                <i class="icon-star3"></i>
+                <i class="icon-star3"></i></li>
+              </ul>
+            </div>
+            <div class="pricing-action">
+              <%= link_to 'Suscribir', orders_path(brand_plan_id: plan.id), class: 'button  text-white  button-large noleftmargin' , method: :post %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+
+  </div>
+<div class="line"></div>

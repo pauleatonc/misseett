@@ -1,0 +1,53 @@
+<ol>
+  <li>
+    <h2>
+      Puertas de Madera
+    </h2>
+    <% @project.specifications.each do |specification| %>
+      <% if specification.product.product_type == ProductType.first %>
+
+        <ol>
+          <li>
+            <h3><%= specification.product.title %></h3>
+            <p><%= specification.product.description %></p>
+            <h4>Referencia:<%= specification.product.brand.name %></h4>
+          </li>
+        </ol>
+      </li>
+    <% end %>
+  <% end %>
+
+  <li>
+    <h2>
+      Puertas Quincalleria
+    </h2>
+    <% @project.specifications.each do |specification| %>
+      <% if specification.product.product_type == ProductType.second %>
+        <ol>
+          <li>
+            <h3><%= specification.product.title %></h3>
+            <p><%= specification.product.description %></p>
+            <h4>Referencia:<%= specification.product.brand.name %></h4>
+          </li>
+        </ol>
+      </li>
+    <% end %>
+  <% end %>
+
+  <li>
+    <h2>
+      Puertas Metálicas
+    </h2>
+    <% @project.specifications.each do |specification| %>
+      <% if specification.product.product_type == ProductType.third %>
+        <ol>
+          <li>
+            <h3><%= specification.product.title %></h3>
+            <p><%= specification.product.description %></p>
+            <h4>Referencia:<%= specification.product.brand.name %></h4>
+          </li>
+        </ol>
+      </li>
+    <% end %>
+  <% end %>
+</ol>

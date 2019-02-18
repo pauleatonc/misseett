@@ -1,0 +1,46 @@
+docx.h1 'Proyecto @project.name'
+docx.h2 'Especificaciones Técnicas de Arquitectura'
+  docx.p
+  docx.h2 '1. Puertas de Madera'
+  docx.p  'Lorem ipsum dolor....'
+  docx.p
+
+    @project.specifications.each do |specification|
+    if specification.product.product_type == ProductType.first
+    docx.h2 specification.product.title
+    docx.p specification.product.description
+    docx.p
+    docx.h3 'Referencia:'
+    docx.h3 specification.product.brand.name
+    end
+    end
+
+  docx.p
+  docx.h2 '2. Quincallería'
+  docx.p  'Lorem ipsum dolor....'
+  docx.p
+
+    @project.specifications.each do |specification|
+    if specification.product.product_type == ProductType.second
+    docx.h2 specification.product.title
+    docx.p specification.product.description
+    docx.p
+    docx.h3 'Referencia:'
+    docx.h3 specification.product.brand.name
+    end
+    end
+
+  docx.p
+  docx.h2 '3. Puertas Metálicas'
+  docx.p  'Lorem ipsum dolor....'
+  docx.p
+
+    @project.specifications.each do |specification|
+    if specification.product.product_type == ProductType.third
+    docx.h2 specification.product.title
+    docx.p specification.product.description
+    docx.p
+    docx.h3 'Referencia:'
+    docx.h3 specification.product.brand.name
+    end
+    end

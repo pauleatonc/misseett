@@ -1,61 +1,121 @@
-<body>
-  <div class="container">
-    <div class="conteiner">
-      <h1>Perfil</h1>
-      <p>Revisa y completa tu perfil</p>
-    </div>
-    <div class="jumbotron">
-      <div class="container">
-        <div class="float-left">
-          <% if @user.avatar.attached? %>
-            <%= image_tag current_user.avatar.variant(resize: "200x200") %>
-          <% else %>
+<div id="section-about" class="section page-section nomargin clearfix" style="background: #EEE url('demos/resume/images/sections/1.jpg') no-repeat center center; background-size: cover; padding: 100px 0">
+  <div class="container clearfix">
+    <div class="row clearfix">
+      <div class="heading-block col-md-6">
+        <h2 class="font-secondary">Sobre Mi.</h2>
+        <p>Revisa y completa tu perfil</p>
+        </div>
+    <% if can? :create, Brand %>
+      <% if @user.brand_id.present? %>
+        <div class="col-md-6">
+          <h3 class="font-secondary"> Empresa </h3>
+          <div> <%= @user_brand.logo %> </div>
+          <h4> <%= @user_brand.name %> </h4>
+          <p> <%= @user_brand.description %> </p>
+          <span><strong>Contacto: </strong> <%= @user_brand.contact %> </span><br>
+          <span><strong>Correo: </strong><%= @user_brand.email %> </span><br>
+          <span><strong>Teléfono </strong><%= @user_brand.phone %> </span><br>
+          <span><strong>Dirección </strong><%= @user_brand.address %> </span><br>
+          <span><strong>Ciudad: </strong><%= @user_brand.city.name %> </span>
+          <div class="">
+            <a class="button bg-dark text-white button-dark button-large noleftmargin" href="<%= orders_path %>" role="button">Compras</a>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  </div>
+</div>
+
+
+<div class="container clearfix">
+  <div class="clearfix center paddingtop">
+        <% if @user.avatar.attached? %>
+          <%= image_tag current_user.avatar.variant(resize: "300x300"), class:"rounded-circle" %>
+        <% else %>
           <%= image_tag("avaregeavatar.png", size: "250x250") %>
-          <% end %>
-        </div>
-        <div class="float-right">
-          <a href="<%= edit_user_registration_path %>" class="btn btn-info" role="button">Editar Perfil</a>
-        </div>
-      </div>
-      <div class="container">
-        <p>
-          <strong>Nombre:</strong>
-          <%= @user.firstname %>
-        </p>
-        <p>
-          <strong>Apellido:</strong>
-          <%= @user.lastname %>
-        </p>
-        <p>
-          <strong>Email:</strong>
-          <%= @user.email %>
-        </p>
-        <p>
-          <strong>Genero:</strong>
-          <% if @user.gender.nil? %>
-            <a>Completar</a>
-          <% else %>
-            <%= @user.gender.name %>
-          <% end %>
-        </p>
-        <p>
-          <strong>Empresa:</strong>
-          <% if @user.company.nil? %>
+        <% end %>
+    </div>
+    <div class="clearfix d-flex justify-content-between paddingtop">
+      <span>
+        <strong>Nombre:</strong><%= @user.firstname %></span>
+      <span>
+        <strong>Apellido:</strong><%= @user.lastname %></span>
+      <span>
+        <strong>Email:</strong><%= @user.email %></span>
+      <span>
+        <strong>Genero:</strong>
+        <% if @user.gender.nil? %>
+          <a>Completar</a>
+        <% else %>
+          <%= @user.gender.name %>
+        <% end %>
+      </span>
+      <span>
+        <strong>Empresa:</strong>
+        <% if @user.company.nil? %>
           <a>Completar</a>
         <% else %>
           <%= @user.company %>
         <% end %>
-        </p>
+      </span>
+      <span>
+        <strong>Ciudad:</strong>
+        <% if @user.city.nil? %>
+          <a>Completar</a>
+        <% else %>
+          <%= @user.city.name %>
+        <% end %>
+      </span>
+    </div>
+    <div class="d-flex justify-content-between paddingtop">
+      <% if can? :create, Brand %>
+        <a href="<%= edit_user_registration_path %>" class="button bg-dark text-white button-dark button-large noleftmargin" role="button">Editar Perfil</a>
+        <a href="<%= new_product_path %>" class="button bg-dark text-white button-dark button-large noleftmargin" role="button">Crear Producto</a>
+        <a href="<%= new_brand_path %>" class="button bg-dark text-white button-dark button-large noleftmargin" role="button">Crear Marca</a>
+        <a href="<%= projects_path %>" class="button bg-dark text-white button-dark button-large noleftmargin" role="button">Ver Proyectos Especificados</a>
+      <% end %>
+    </div>
+  </div>
 
-        <p>
-          <strong>Ciudad:</strong>
-          <% if @user.city.nil? %>
-            <a>Completar</a>
-          <% else %>
-            <%= @user.city %>
-          <% end %>
-          </p>
-        </div>
+  <div class="line notopmargin"></div>
+
+
+  <% if can? :create, Brand %>
+
+  <div class="content-wrap">
+    <div class="container clearfix">
+      <div id="shop" class="shop grid-container clearfix " data-layout="fitRows">
+        <% @user.brands.each do |brand| %>
+          <div class="product clearfix ">
+            <% if brand.logo.attached? %>
+              <div class="product-image"> <%= image_tag brand.logo.first.variant(resize: "200x200") %>
+                <div class="product-overlay">
+                  <a href="<%= brand_path(brand.id)%>" class="add-to-cart" >
+                    <i class="icon-zoom-in2"></i><span>Mostrar</span></a>
+                  <a href="<%= edit_brand_path(brand.id) %>" class="add-to-cart">
+                    <i class="far fa-edit"></i><span>Editar</span></a>
+                  </div>
+              </div>
+            <% else %>
+              <div class="product-image producthigh">
+                <%= image_tag("logo.jpg", size: "200x200") %>
+                <div class="product-overlay">
+                  <a href="<%= brand_path(brand.id)%>" class="add-to-cart" >
+                    <i class="icon-zoom-in2"></i><span>Mostrar</span></a>
+                  <a href="<%= edit_brand_path(brand.id) %>" class="add-to-cart">
+                    <i class="far fa-edit"></i><span>Editar</span></a>
+                  <i class="far fa-trash-alt"><%= link_to 'Destroy', brand, method: :delete, data: { confirm: 'Are you sure?' }, class:"add-to-cart " %></i>
+                  </div>
+              </div>
+            <% end %>
+            <div class="product-desc producthigh">
+              <div class="product-title"><h3><%= brand.name %></h3></div>
+              <%= link_to 'Eliminar Marca', brand, method: :delete, data: { confirm: 'Are you sure?' }, class:"far fa-trash-alt" %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
-  </body>
+  </div>
+<% end %>

@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_project, only: [:index, :show, :edit, :update, :destroy, :create, :status_opened, :status_closed]
-
+  before_action :set_project, only: %i[show edit update destroy status_opened status_closed]
+  load_and_authorize_resource
   # GET /projects
   # GET /projects.json
   def index
@@ -12,6 +12,14 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
+  end
+
+  def getdocument
+    @project = Project.find(params[:id])
+    @document = 'Especificaciones Técnicas de arquitectura'
+    respond_to do |format|
+      format.docx { headers['Content-Disposition'] = "attachment; filename=\"#{@project.name}.docx\"" }
+    end
   end
 
   # GET /projects/new
@@ -41,17 +49,16 @@ class ProjectsController < ApplicationController
   end
 
   def status_opened
-    @project.status_open?  true
+    @project.status_open = true
     @project.save
     redirect_to projects_path, notice: 'Se ha cambiado el status del proyecto'
   end
 
   def status_closed
-    @project.status_open?  false
+    @project.status_open = false
     @project.save
     redirect_to projects_path, notice: 'Se ha cambiado el status del proyecto'
   end
-
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
@@ -79,13 +86,14 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:user_id, :name, :description, :office, :project_type_id, :project_traffic_id, :city_id, :product_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:user_id, :name, :description, :office, :project_type_id, :project_traffic_id, :city_id, :product_id)
+  end
 end

@@ -9,12 +9,12 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_12_22_225922) do
-=======
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_01_10_031643) do
->>>>>>> develop
+=======
+ActiveRecord::Schema.define(version: 2019_01_30_182713) do
+>>>>>>> layout
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,26 +40,49 @@ ActiveRecord::Schema.define(version: 2019_01_10_031643) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "billings", force: :cascade do |t|
+    t.string "code"
+    t.string "payment_method"
+    t.decimal "amount", precision: 10, scale: 2
+    t.string "currency"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_billings_on_user_id"
+  end
+
+  create_table "brand_plans", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "duration"
+    t.integer "brands"
+    t.integer "products"
+  end
+
+  create_table "brands", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "contact"
+    t.string "email"
+    t.string "phone"
+    t.string "address"
+    t.bigint "city_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_brands_on_city_id"
+    t.index ["user_id"], name: "index_brands_on_user_id"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.bigint "state_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["state_id"], name: "index_cities_on_state_id"
-  end
-
-  create_table "companies", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.string "contact"
-    t.string "email"
-    t.integer "phone"
-    t.string "address_1"
-    t.string "address_2"
-    t.bigint "city_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["city_id"], name: "index_companies_on_city_id"
   end
 
   create_table "continents", force: :cascade do |t|
@@ -93,6 +116,20 @@ ActiveRecord::Schema.define(version: 2019_01_10_031643) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.boolean "payed", default: false
+    t.bigint "user_id"
+    t.bigint "brand_plan_id"
+    t.integer "quantity", default: 1
+    t.integer "price"
+    t.bigint "billing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billing_id"], name: "index_orders_on_billing_id"
+    t.index ["brand_plan_id"], name: "index_orders_on_brand_plan_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "product_types", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.datetime "created_at", null: false
@@ -106,11 +143,11 @@ ActiveRecord::Schema.define(version: 2019_01_10_031643) do
     t.string "code"
     t.bigint "project_traffic_id"
     t.bigint "project_type_id"
-    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "product_type_id"
-    t.index ["company_id"], name: "index_products_on_company_id"
+    t.bigint "brand_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"
     t.index ["project_traffic_id"], name: "index_products_on_project_traffic_id"
     t.index ["project_type_id"], name: "index_products_on_project_type_id"
@@ -185,6 +222,8 @@ ActiveRecord::Schema.define(version: 2019_01_10_031643) do
     t.bigint "city_id"
     t.bigint "gender_id"
     t.string "company"
+    t.bigint "brand_id"
+    t.index ["brand_id"], name: "index_users_on_brand_id"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender_id"], name: "index_users_on_gender_id"
@@ -199,9 +238,14 @@ ActiveRecord::Schema.define(version: 2019_01_10_031643) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "companies", "cities"
+  add_foreign_key "billings", "users"
+  add_foreign_key "brands", "cities"
+  add_foreign_key "brands", "users"
   add_foreign_key "events", "projects"
-  add_foreign_key "products", "companies"
+  add_foreign_key "orders", "billings"
+  add_foreign_key "orders", "brand_plans"
+  add_foreign_key "orders", "users"
+  add_foreign_key "products", "brands"
   add_foreign_key "products", "product_types"
   add_foreign_key "products", "project_traffics"
   add_foreign_key "products", "project_types"
@@ -211,6 +255,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_031643) do
   add_foreign_key "projects", "users"
   add_foreign_key "specifications", "products"
   add_foreign_key "specifications", "projects"
+  add_foreign_key "users", "brands"
   add_foreign_key "users", "cities"
   add_foreign_key "users", "genders"
 end
