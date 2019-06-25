@@ -20,17 +20,19 @@
     <div id="shop" class="shop grid-container clearfix " data-layout="fitRows">
       <% @products.each do |product| %>
 
-          <div class="product clearfix ">
+          <div class="product producthigh clearfix ">
             <% if product.images.attached? %>
-              <div class="product-image"> <%= image_tag product.images.first.variant(resize: "200x200") %><div class="product-overlay">
+              <div class="product-image"> <%= image_tag product.images.variant(resize: "200x200").processed %><div class="product-overlay">
                   <a href="<%= brand_product_path(product.brand_id, :id => product.id)%>" class="item-quick-view" data-lightbox="ajax">
                     <i class="icon-zoom-in2"></i><span>Mostrar</span></a>
                   <% if params[:project_id].nil? %>
                     <a href="<%= projects_path %>" class="add-to-cart">
                       <i class="icon-shopping-cart"></i><span>Especificar</span></a>
                   <% else %>
-                    <a href="<%= projects_path %>" class="add-to-cart">
-                      <i class="icon-shopping-cart"></i><span>Especificar</span></a>
+                  <%= link_to project_product_specifications_path(params[:project_id], product), method: :post do %>
+                    <i class="icon-shopping-cart"></i>
+                    <span>Especificar</span>
+                    <% end %>
                   <% end %>
                 </div>
               </div>

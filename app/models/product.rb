@@ -5,6 +5,6 @@ class Product < ApplicationRecord
   belongs_to :project_type
   belongs_to :product_type
   belongs_to :brand
-  has_many_attached :images
+  has_one_attached :images
   resourcify
 end

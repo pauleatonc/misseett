@@ -13,14 +13,14 @@ ProjectTraffic.destroy_all
 ProjectType.destroy_all
 ProductType.destroy_all
 Event.destroy_all
-Brand_plan.destroy_all
+# Brand_plan.destroy_all
 
 User.create!(email: 'paul.ermat@gmail.com', password: '123456', firstname: 'Paul', lastname: 'Eaton')
 Gender.create!([{ name: 'Male' }, { name: 'Female' }, { name: 'Other' }])
 
-Brand_plan.create!([{ name: 'Inicial', description: '3 meses de prueba como Brand Manager', price: 0 },
-                    { name: 'Semestral', description: '6 meses como Brand Manager', price: 500 },
-                    { name: 'Anual', description: '1 año como Brand Manager', price: 1000 }])
+# Brand_plan.create!([{ name: 'Inicial', description: '3 meses de prueba como Brand Manager', price: 0 },
+#                     { name: 'Semestral', description: '6 meses como Brand Manager', price: 500 },
+#                     { name: 'Anual', description: '1 año como Brand Manager', price: 1000 }])
 
 america = Continent.create(name: 'America del Sur')
 
@@ -75,27 +75,27 @@ ProjectType.create([{ category: 'Institucional' }, { category: 'Educacional' }, 
 
 ProductType.create!([{ name: 'Puertas de Madera' }, { name: 'Quincalleria' }, { name: 'Puertas Metálicas' }])
 
-6.times do
-  Brand.create!(
-    name: Faker::Company.name,
-    description: Faker::Company.catch_phrase,
-    contact: Faker::Movies::Lebowski.character,
-    email: Faker::Internet.email,
-    phone: Faker::PhoneNumber.phone_number,
-    address: Faker::Address.street_address,
-    city: City.all.sample,
-    user: User.first
-  )
-end
-
-30.times do
-  Product.create!(
-    title: Faker::Commerce.product_name,
-    description: Faker::TvShows::MichaelScott.quote,
-    eett: Faker::Lorem.paragraph,
-    project_traffic: ProjectTraffic.all.sample,
-    project_type: ProjectType.all.sample,
-    product_type: ProductType.all.sample,
-    brand: Brand.all.sample
-  )
-end
+# 6.times do
+#   Brand.create!(
+#     name: Faker::Company.name,
+#     description: Faker::Company.catch_phrase,
+#     contact: Faker::Movies::Lebowski.character,
+#     email: Faker::Internet.email,
+#     phone: Faker::PhoneNumber.phone_number,
+#     address: Faker::Address.street_address,
+#     city: City.all.sample,
+#     user: User.first
+#   )
+# end
+#
+# 30.times do
+#   Product.create!(
+#     title: Faker::Commerce.product_name,
+#     description: Faker::TvShows::MichaelScott.quote,
+#     eett: Faker::Lorem.paragraph,
+#     project_traffic: ProjectTraffic.all.sample,
+#     project_type: ProjectType.all.sample,
+#     product_type: ProductType.all.sample,
+#     brand: Brand.all.sample
+#   )
+# end

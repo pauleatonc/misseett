@@ -2,10 +2,14 @@
   padding-bottom: : 40px;
 }
 .producthigh{
-  height: 120px;
+  height: 600px;
 }
 
 .alignbottom{
   align-items: flex-end;
   padding-bottom: 20px;
+}
+
+.producthigh2{
+  height: 600px;
 }

@@ -89,7 +89,7 @@
         <% @user.brands.each do |brand| %>
           <div class="product clearfix ">
             <% if brand.logo.attached? %>
-              <div class="product-image"> <%= image_tag brand.logo.first.variant(resize: "200x200") %>
+              <div class="product-image"> <%= image_tag brand.logo.variant(resize: "200x200") %>
                 <div class="product-overlay">
                   <a href="<%= brand_path(brand.id)%>" class="add-to-cart" >
                     <i class="icon-zoom-in2"></i><span>Mostrar</span></a>
@@ -98,7 +98,7 @@
                   </div>
               </div>
             <% else %>
-              <div class="product-image producthigh">
+              <div class="product-image producthigh2">
                 <%= image_tag("logo.jpg", size: "200x200") %>
                 <div class="product-overlay">
                   <a href="<%= brand_path(brand.id)%>" class="add-to-cart" >
@@ -109,7 +109,7 @@
                   </div>
               </div>
             <% end %>
-            <div class="product-desc producthigh">
+            <div class="product-desc producthigh2">
               <div class="product-title"><h3><%= brand.name %></h3></div>
               <%= link_to 'Eliminar Marca', brand, method: :delete, data: { confirm: 'Are you sure?' }, class:"far fa-trash-alt" %>
             </div>
